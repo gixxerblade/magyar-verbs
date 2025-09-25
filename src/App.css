@@ -1,0 +1,505 @@
+.app {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  color: #1f2933;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+  align-items: center;
+}
+
+.hero__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.hero__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1.15;
+}
+
+.hero p {
+  margin: 8px 0 0;
+  color: #4d5a6a;
+}
+
+.tab-list {
+  display: flex;
+  gap: 8px;
+  background: #ebf0f8;
+  padding: 6px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4d5a6a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab:hover:not(.tab--active) {
+  background: rgba(255, 255, 255, 0.8);
+  color: #1f2933;
+}
+
+.tab--active {
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(31, 41, 51, 0.12);
+  color: #1f2933;
+}
+
+.tab-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(31, 41, 51, 0.08);
+  padding: 32px;
+}
+
+.panel__section + .panel__section {
+  margin-top: 32px;
+}
+
+.panel h2,
+.panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+}
+
+.panel h3 {
+  font-size: 1.1rem;
+}
+
+.panel h2 svg,
+.panel h3 svg {
+  width: 24px;
+  height: 24px;
+  color: #ff758c;
+}
+
+.section-intro {
+  margin: 0 0 24px;
+  color: #4d5a6a;
+}
+
+.data-table {
+  display: grid;
+  gap: 12px;
+}
+
+.data-table__header,
+.data-table__row {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 100px 140px;
+  align-items: center;
+  gap: 8px;
+}
+
+.data-table__header {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7a8899;
+}
+
+.data-table__row {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #f8fafc;
+  position: relative;
+}
+
+.data-table__pronoun {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.data-table__note {
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: #6b7687;
+}
+
+.tips {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  color: #4d5a6a;
+}
+
+.verb-picker {
+  margin-bottom: 24px;
+}
+
+.verb-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+.verb-card {
+  border-radius: 14px;
+  padding: 16px;
+  background: #f0f4ff;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.verb-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.verb-card--active {
+  border-color: #6366f1;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(99, 102, 241, 0.08));
+}
+
+.verb-card__stem {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.verb-card__meta {
+  margin: 0;
+  color: #4d5a6a;
+}
+
+.verb-card__tag {
+  margin-top: 10px;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.35);
+  color: #0f609b;
+}
+
+.conjugation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.conjugation-card {
+  border-radius: 16px;
+  padding: 18px;
+  background: #eef2ff;
+  display: grid;
+  gap: 6px;
+  text-align: center;
+}
+
+.conjugation-card__pronoun {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.conjugation-card__form {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.conjugation-card__ending {
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.sample-sentence {
+  margin: 0;
+  padding: 16px 20px;
+  border-left: 4px solid #6366f1;
+  background: #f8fafc;
+  color: #334155;
+  border-radius: 12px;
+  font-style: italic;
+}
+
+.quiz {
+  display: grid;
+  gap: 16px;
+}
+
+.quiz__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  color: #4d5a6a;
+}
+
+.quiz__prompt {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1f2933;
+}
+
+.quiz__score {
+  font-size: 0.9rem;
+}
+
+.quiz__options {
+  display: grid;
+  gap: 12px;
+}
+
+.quiz__option {
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background: #f8fafc;
+  font-size: 1.05rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1f2933;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz__option:disabled {
+  cursor: not-allowed;
+}
+
+.quiz__option--idle:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+  transform: translateY(-2px);
+}
+
+.quiz__option--correct {
+  border-color: rgba(34, 197, 94, 0.7);
+  background: rgba(220, 252, 231, 0.9);
+}
+
+.quiz__option--incorrect {
+  border-color: rgba(248, 113, 113, 0.7);
+  background: rgba(254, 226, 226, 0.9);
+}
+
+.quiz__feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz__feedback--good,
+.quiz__feedback--bad {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.quiz__feedback--good {
+  color: #059669;
+}
+
+.quiz__feedback--bad {
+  color: #dc2626;
+}
+
+.quiz__feedback svg {
+  width: 22px;
+  height: 22px;
+}
+
+.quiz__next {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.quiz__next:hover {
+  transform: translateY(-1px);
+}
+
+.harmony-card {
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(244, 114, 182, 0.15));
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+}
+
+.harmony-card__body {
+  display: grid;
+  gap: 4px;
+}
+
+.harmony-card__label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7a8899;
+}
+
+.harmony-card__verb {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.harmony-card__meta {
+  margin: 0;
+  color: #4d5a6a;
+}
+
+.harmony-card__clue {
+  font-weight: 600;
+  color: #334155;
+}
+
+.harmony-card__choices {
+  display: contents;
+}
+
+.harmony-card__choice-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.harmony-card__choice {
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.harmony-card__choice:hover {
+  border-color: rgba(244, 114, 182, 0.45);
+}
+
+.harmony-card__choice--active {
+  border-color: #f472b6;
+  background: rgba(244, 114, 182, 0.18);
+}
+
+.harmony-card__choice-title {
+  font-weight: 600;
+}
+
+.harmony-card__choice-ending {
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.harmony-card__feedback {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.harmony-card__feedback svg {
+  width: 22px;
+  height: 22px;
+}
+
+.harmony-card__feedback--good {
+  color: #0f766e;
+}
+
+.harmony-card__feedback--bad {
+  color: #dc2626;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 32px 16px 72px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .hero__icon {
+    justify-self: flex-start;
+  }
+
+  .data-table__header,
+  .data-table__row {
+    grid-template-columns: 80px 1fr 80px;
+  }
+
+  .data-table__row span:nth-of-type(3),
+  .data-table__row span:nth-of-type(4) {
+    display: none;
+  }
+
+  .data-table__header span:nth-of-type(3),
+  .data-table__header span:nth-of-type(4) {
+    display: none;
+  }
+
+  .tab-list {
+    flex-wrap: wrap;
+  }
+}
