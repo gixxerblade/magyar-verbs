@@ -1,7 +1,7 @@
 {
   "name": "magyar-verbs",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,6 +17,7 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
     "@tanstack/react-router-devtools": "^1.132.37",
     "@tanstack/router-plugin": "^1.132.37",
     "@types/react": "^19.2.0",
