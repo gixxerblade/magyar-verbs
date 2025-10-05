@@ -3,8 +3,9 @@ import { LightBulbIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/24
 import { Fragment } from 'react/jsx-runtime';
 import { pronounHints, vowelHarmonyLabels } from '../contants';
 import { HarmonyChallenge, VowelHarmony } from '../types';
-import { classNames, createHarmonyChallenge, getEndingDescription } from '../utils/utils';
+import { classNames, getEndingDescription } from '../utils/utils';
 import { useState } from 'react';
+import { createHarmonyChallenge } from '../utils/createHarmonyChallenge';
 
 export function HarmonyDrillPage() {
   const [harmonyChallenge, setHarmonyChallenge] = useState<HarmonyChallenge>(() =>
