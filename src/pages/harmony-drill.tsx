@@ -1,11 +1,16 @@
-import { RadioGroup, Transition, Radio } from '@headlessui/react';
-import { LightBulbIcon, CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { Fragment } from 'react/jsx-runtime';
+import { RadioGroup, Radio } from '@headlessui/react';
+import {
+  LightBulbIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+  ArrowPathIcon,
+} from '@heroicons/react/24/outline';
 import { pronounHints, vowelHarmonyLabels } from '../contants';
 import { HarmonyChallenge, VowelHarmony } from '../types';
 import { classNames, getEndingDescription } from '../utils/utils';
 import { useState } from 'react';
 import { createHarmonyChallenge } from '../utils/createHarmonyChallenge';
+import { indefinitePatterns } from '../data/conjugation';
 
 export function HarmonyDrillPage() {
   const [harmonyChallenge, setHarmonyChallenge] = useState<HarmonyChallenge>(() =>
@@ -13,19 +18,28 @@ export function HarmonyDrillPage() {
   );
   const [harmonyChoice, setHarmonyChoice] = useState<VowelHarmony | null>(null);
   const [harmonyFeedback, setHarmonyFeedback] = useState<'correct' | 'incorrect' | null>(null);
+  const harmonyAnswered = harmonyChoice !== null;
+
+  // Get English pronoun and verb for the hint
+  const pattern = indefinitePatterns.find(p => p.pronoun === harmonyChallenge.pronoun);
+  const englishPronoun = pattern?.english || '';
+  const verbBase = harmonyChallenge.verb.english.replace(/^to /, '');
+  const targetHint = `${pronounHints[harmonyChallenge.pronoun]} - ${englishPronoun} ${verbBase}`;
+
   const handleHarmonySubmit = (choice: VowelHarmony | null) => {
-    if (!choice) return;
+    if (!choice || harmonyAnswered) return;
     setHarmonyChoice(choice);
     if (choice === harmonyChallenge.verb.harmony) {
       setHarmonyFeedback('correct');
-      setTimeout(() => {
-        setHarmonyFeedback(null);
-        setHarmonyChoice(null);
-        setHarmonyChallenge(createHarmonyChallenge());
-      }, 1200);
     } else {
       setHarmonyFeedback('incorrect');
     }
+  };
+
+  const handleHarmonyNext = () => {
+    setHarmonyChoice(null);
+    setHarmonyFeedback(null);
+    setHarmonyChallenge(createHarmonyChallenge());
   };
 
   return (
@@ -45,63 +59,73 @@ export function HarmonyDrillPage() {
             <p className='harmony-card__meta'>
               {harmonyChallenge.verb.infinitive} · {harmonyChallenge.verb.english}
             </p>
-            <p className='harmony-card__clue'>
-              Target form: {pronounHints[harmonyChallenge.pronoun]}
-            </p>
+            <p className='harmony-card__clue'>Target form: {targetHint}</p>
           </div>
           <RadioGroup
             value={harmonyChoice}
             onChange={handleHarmonySubmit}
             className='harmony-card__choices'
+            disabled={harmonyAnswered}
           >
             <RadioGroup.Label className='sr-only'>Choose vowel harmony</RadioGroup.Label>
             <div className='harmony-card__choice-grid'>
-              {(Object.keys(vowelHarmonyLabels) as VowelHarmony[]).map(key => (
-                <Radio
-                  key={key}
-                  value={key}
-                  className={({ checked }) =>
-                    classNames('harmony-card__choice', checked && 'harmony-card__choice--active')
+              {(Object.keys(vowelHarmonyLabels) as VowelHarmony[]).map(key => {
+                const isCorrectAnswer = key === harmonyChallenge.verb.harmony;
+                const isSelected = harmonyChoice === key;
+
+                let statusClass = '';
+                if (harmonyAnswered) {
+                  if (isCorrectAnswer) {
+                    statusClass = 'harmony-card__choice--correct';
+                  } else if (isSelected) {
+                    statusClass = 'harmony-card__choice--incorrect';
                   }
-                >
-                  <span className='harmony-card__choice-title'>{vowelHarmonyLabels[key]}</span>
-                  <span className='harmony-card__choice-ending'>
-                    {getEndingDescription(harmonyChallenge.pronoun, key)}
-                  </span>
-                </Radio>
-              ))}
+                } else if (isSelected) {
+                  statusClass = 'harmony-card__choice--active';
+                }
+
+                return (
+                  <Radio
+                    key={key}
+                    value={key}
+                    disabled={harmonyAnswered}
+                    className={classNames('harmony-card__choice', statusClass)}
+                  >
+                    <span className='harmony-card__choice-title'>{vowelHarmonyLabels[key]}</span>
+                    <span className='harmony-card__choice-ending'>
+                      {getEndingDescription(harmonyChallenge.pronoun, key)}
+                    </span>
+                  </Radio>
+                );
+              })}
             </div>
           </RadioGroup>
-          <Transition
-            show={harmonyFeedback !== null}
-            as={Fragment}
-            enter='transition ease-out duration-200'
-            enterFrom='opacity-0 translate-y-2'
-            enterTo='opacity-100 translate-y-0'
-            leave='transition ease-in duration-150'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
-          >
-            <div
-              className={classNames(
-                'harmony-card__feedback',
-                harmonyFeedback === 'correct'
-                  ? 'harmony-card__feedback--good'
-                  : 'harmony-card__feedback--bad'
-              )}
-            >
-              {harmonyFeedback === 'correct' ? (
-                <>
-                  <CheckCircleIcon aria-hidden='true' /> {harmonyChallenge.target}
-                </>
-              ) : (
-                <>
-                  <XCircleIcon aria-hidden='true' /> Try again – the correct ending is{' '}
-                  {getEndingDescription(harmonyChallenge.pronoun, harmonyChallenge.verb.harmony)}.
-                </>
-              )}
+          {harmonyAnswered ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div
+                className={classNames(
+                  'harmony-card__feedback',
+                  harmonyFeedback === 'correct'
+                    ? 'harmony-card__feedback--good'
+                    : 'harmony-card__feedback--bad'
+                )}
+              >
+                {harmonyFeedback === 'correct' ? (
+                  <>
+                    <CheckCircleIcon aria-hidden='true' /> {harmonyChallenge.target}
+                  </>
+                ) : (
+                  <>
+                    <XCircleIcon aria-hidden='true' /> The correct ending is{' '}
+                    {getEndingDescription(harmonyChallenge.pronoun, harmonyChallenge.verb.harmony)}.
+                  </>
+                )}
+              </div>
+              <button type='button' className='quiz__next' onClick={handleHarmonyNext}>
+                <ArrowPathIcon color="white" className="w-4 h-4" />{' '}Next
+              </button>
             </div>
-          </Transition>
+          ) : null}
         </div>
       </section>
     </div>

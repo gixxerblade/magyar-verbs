@@ -1,5 +1,5 @@
 import { pronounOrder, pronounHints } from '../contants';
-import { sampleVerbs } from '../data/conjugation';
+import { indefinitePatterns, sampleVerbs } from '../data/conjugation';
 import { buildConjugation, shuffle } from './utils';
 
 export interface Flashcard {
@@ -23,9 +23,15 @@ export function createFlashcards(): Flashcard[] {
     // Add conjugation cards for each pronoun
     pronounOrder.forEach(pronoun => {
       const conjugation = buildConjugation(verb, pronoun);
+      const pattern = indefinitePatterns.find(p => p.pronoun === pronoun);
+      const englishPronoun = pattern?.english || '';
+
+      // Convert "to verb" to conjugated form (e.g., "to party" → "party")
+      const verbBase = verb.english.replace(/^to /, '');
+
       flashcards.push({
         front: conjugation,
-        back: `${pronounHints[pronoun]} · ${verb.english}`,
+        back: `${pronounHints[pronoun]} · ${englishPronoun} ${verbBase}`,
         type: 'conjugation',
       });
     });

@@ -8,6 +8,8 @@ import { classNames, buildConjugation } from '../utils/utils';
 import { useState } from 'react';
 import { createQuizQuestion } from '../utils/createQuizQuestion';
 import { QuizQuestion } from '../types';
+import { indefinitePatterns } from '../data/conjugation';
+import { pronounHints } from '../contants';
 
 const QUIZ_LENGTH = 8;
 
@@ -18,6 +20,12 @@ export function QuizPage() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const quizAnswered = quizSelection !== null;
   const quizIsCorrect = quizSelection === quizQuestion.answer;
+
+  // Get English pronoun and verb for the hint
+  const pattern = indefinitePatterns.find(p => p.pronoun === quizQuestion.pronoun);
+  const englishPronoun = pattern?.english || '';
+  const verbBase = quizQuestion.verb.english.replace(/^to /, '');
+  const quizHint = `${pronounHints[quizQuestion.pronoun]} · ${englishPronoun} ${verbBase}`;
 
   const handleQuizPick = (option: string) => {
     if (quizAnswered || quizCompleted) return;
@@ -59,7 +67,12 @@ export function QuizPage() {
         </p>
         <div className='quiz'>
           <div className='quiz__meta'>
-            <span className='quiz__prompt'>{quizQuestion.clue}</span>
+            <div>
+              <div className='quiz__prompt'>{quizQuestion.clue}</div>
+              <div style={{ fontSize: '0.9rem', color: '#6b7280', marginTop: '0.25rem' }}>
+                {quizHint}
+              </div>
+            </div>
             <span className='quiz__score'>
               {quizCompleted
                 ? `Final score ${quizScore.correct}/${QUIZ_LENGTH}`

@@ -443,6 +443,16 @@
   background: rgba(244, 114, 182, 0.18);
 }
 
+.harmony-card__choice--correct {
+  border-color: rgba(34, 197, 94, 0.7);
+  background: rgba(220, 252, 231, 0.9);
+}
+
+.harmony-card__choice--incorrect {
+  border-color: rgba(248, 113, 113, 0.7);
+  background: rgba(254, 226, 226, 0.9);
+}
+
 .harmony-card__choice-title {
   font-weight: 600;
 }

@@ -67,21 +67,46 @@ export function ReferencePage() {
         <h3>
           <LightBulbIcon aria-hidden='true' /> Study Tips
         </h3>
-        <ul className='tips'>
-          <li>
-            Focus on the vowel harmony of the stem: back vowels take <code>-o-/-a-</code> endings,
-            while front vowels prefer <code>-e-/-i-</code>, and rounded front vowels use{' '}
-            <code>-ö-/-ü-</code> forms.
-          </li>
-          <li>
-            First and third person singular can sound similar; rely on the subject pronoun or
-            context to pick out the form.
-          </li>
-          <li>
-            Stems ending with consonant clusters may insert linking vowels, but the verbs here stay
-            compact.
-          </li>
-        </ul>
+        <div style={{ display: 'grid', gap: '1rem' }}>
+          <div>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0' }}>
+              1. Start with the pronouns - memorize these first!
+            </h4>
+            <ul className='tips' style={{ marginTop: '0.5rem' }}>
+              <li><strong>én</strong> (I) - always ends in <code>-ok/-ek/-ök</code></li>
+              <li><strong>te</strong> (you) - always ends in <code>-sz</code></li>
+              <li><strong>ő</strong> (he/she/it) - no ending, just the verb stem</li>
+              <li><strong>mi</strong> (we) - always ends in <code>-unk/-ünk</code></li>
+              <li><strong>ti</strong> (you all) - always ends in <code>-tok/-tek/-tök</code></li>
+              <li><strong>ők</strong> (they) - always ends in <code>-nak/-nek</code></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0' }}>
+              2. Pick the right column based on the verb's vowels
+            </h4>
+            <ul className='tips' style={{ marginTop: '0.5rem' }}>
+              <li><strong>Back vowels</strong> (a, á, o, ó, u, ú) → Use the "Back" column</li>
+              <li><strong>Front unrounded</strong> (e, é, i, í) → Use the "Front" column</li>
+              <li><strong>Front rounded</strong> (ö, ő, ü, ű) → Use the "Front (rounded)" column</li>
+            </ul>
+            <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: '#4d5a6a', fontStyle: 'italic' }}>
+              Example: "tanul" has "a" and "u" (back vowels), so use the Back column
+            </p>
+          </div>
+
+          <div>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0' }}>
+              3. Watch out for these tricky ones
+            </h4>
+            <ul className='tips' style={{ marginTop: '0.5rem' }}>
+              <li><strong>ő</strong> (he/she/it) has NO ending - just use the verb stem as-is</li>
+              <li><strong>te</strong> (you) always ends in <code>-sz</code> regardless of vowel harmony</li>
+              <li>When listening, <strong>én</strong> (I) and <strong>ő</strong> (he/she/it) can sound similar - pay attention to context</li>
+            </ul>
+          </div>
+        </div>
       </section>
     </div>
   );
