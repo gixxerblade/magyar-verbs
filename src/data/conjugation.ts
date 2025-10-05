@@ -1,25 +1,5 @@
-export type VowelHarmony = 'back' | 'front' | 'mixed'
+import { ConjugationPattern, VerbEntry } from '../types';
 
-export interface ConjugationPattern {
-  pronoun: string
-  english: string
-  endings: Record<VowelHarmony, string>
-  note?: string
-}
-
-export interface VerbEntry {
-  infinitive: string
-  stem: string
-  english: string
-  harmony: VowelHarmony
-  sample?: string
-}
-
-export const vowelHarmonyLabels: Record<VowelHarmony, string> = {
-  back: 'Back (a, á, o, ó, u, ú)',
-  front: 'Front unrounded (e, é, i, í)',
-  mixed: 'Front rounded (ö, ő, ü, ű)'
-}
 
 export const indefinitePatterns: ConjugationPattern[] = [
   {
@@ -28,9 +8,9 @@ export const indefinitePatterns: ConjugationPattern[] = [
     endings: {
       back: '-ok',
       front: '-ek',
-      mixed: '-ök'
+      mixed: '-ök',
     },
-    note: "The stem remains unchanged; choose the ending that matches the verb's vowel harmony."
+    note: "The stem remains unchanged; choose the ending that matches the verb's vowel harmony.",
   },
   {
     pronoun: 'te',
@@ -38,9 +18,9 @@ export const indefinitePatterns: ConjugationPattern[] = [
     endings: {
       back: '-sz',
       front: '-sz',
-      mixed: '-sz'
+      mixed: '-sz',
     },
-    note: 'Some stems ending in s, sz, z, dz assimilate (e.g. `olvas` → `olvasol`), but our focus verbs do not require a connecting vowel.'
+    note: 'Some stems ending in s, sz, z, dz assimilate (e.g. `olvas` → `olvasol`), but our focus verbs do not require a connecting vowel.',
   },
   {
     pronoun: 'ő',
@@ -48,9 +28,9 @@ export const indefinitePatterns: ConjugationPattern[] = [
     endings: {
       back: '—',
       front: '—',
-      mixed: '—'
+      mixed: '—',
     },
-    note: 'No ending is added in the indefinite present tense. The bare stem is the full form.'
+    note: 'No ending is added in the indefinite present tense. The bare stem is the full form.',
   },
   {
     pronoun: 'mi',
@@ -58,8 +38,8 @@ export const indefinitePatterns: ConjugationPattern[] = [
     endings: {
       back: '-unk',
       front: '-ünk',
-      mixed: '-ünk'
-    }
+      mixed: '-ünk',
+    },
   },
   {
     pronoun: 'ti',
@@ -67,8 +47,8 @@ export const indefinitePatterns: ConjugationPattern[] = [
     endings: {
       back: '-tok',
       front: '-tek',
-      mixed: '-tök'
-    }
+      mixed: '-tök',
+    },
   },
   {
     pronoun: 'ők',
@@ -76,10 +56,10 @@ export const indefinitePatterns: ConjugationPattern[] = [
     endings: {
       back: '-nak',
       front: '-nek',
-      mixed: '-nek'
-    }
-  }
-]
+      mixed: '-nek',
+    },
+  },
+];
 
 export const sampleVerbs: VerbEntry[] = [
   {
@@ -87,62 +67,301 @@ export const sampleVerbs: VerbEntry[] = [
     stem: 'tanul',
     english: 'to learn',
     harmony: 'back',
-    sample: 'Minden nap tanulok magyarul. (I study Hungarian every day.)'
+    sample: 'Minden nap tanulok magyarul. (I study Hungarian every day.)',
   },
   {
     infinitive: 'olvasni',
     stem: 'olvas',
     english: 'to read',
     harmony: 'back',
-    sample: 'Te sok könyvet olvasol. (You read many books.)'
+    sample: 'Te sok könyvet olvasol. (You read many books.)',
   },
   {
     infinitive: 'írni',
     stem: 'ír',
     english: 'to write',
     harmony: 'front',
-    sample: 'Ő levelet ír. (He/She writes a letter.)'
+    sample: 'Ő levelet ír. (He/She writes a letter.)',
   },
   {
     infinitive: 'fizetni',
     stem: 'fizet',
     english: 'to pay',
     harmony: 'front',
-    sample: 'Mi ritkán fizetünk készpénzben. (We rarely pay in cash.)'
+    sample: 'Mi ritkán fizetünk készpénzben. (We rarely pay in cash.)',
   },
   {
     infinitive: 'fürödni',
     stem: 'füröd',
     english: 'to bathe',
     harmony: 'mixed',
-    sample: 'Ti este fürödtök. (You bathe in the evening.)'
+    sample: 'Ti este fürödtök. (You bathe in the evening.)',
   },
   {
     infinitive: 'törni',
     stem: 'tör',
     english: 'to break',
     harmony: 'mixed',
-    sample: 'Ők néha szabályt törnek. (They sometimes break a rule.)'
-  }
-]
-
-export const pronounOrder = ['én', 'te', 'ő', 'mi', 'ti', 'ők'] as const
-
-export type Pronoun = (typeof pronounOrder)[number]
-
-export function buildConjugation(verb: VerbEntry, pronoun: Pronoun): string {
-  const pattern = indefinitePatterns.find((item) => item.pronoun === pronoun)
-  if (!pattern) return verb.stem
-  const ending = pattern.endings[verb.harmony]
-  if (ending === '—') {
-    return verb.stem
-  }
-  return `${verb.stem}${ending.replace('-', '')}`
-}
-
-export function getEndingDescription(pronoun: Pronoun, harmony: VowelHarmony): string {
-  const pattern = indefinitePatterns.find((item) => item.pronoun === pronoun)
-  if (!pattern) return ''
-  return pattern.endings[harmony]
-}
+    sample: 'Ők néha szabályt törnek. (They sometimes break a rule.)',
+  },
+  {
+    infinitive: 'aludni',
+    stem: 'alud',
+    english: 'to sleep',
+    harmony: 'back',
+    sample: 'Nyolc órát aludok minden éjjel. (I sleep eight hours every night.)',
+  },
+  {
+    infinitive: 'baseballozni',
+    stem: 'baseballoz',
+    english: 'to play baseball',
+    harmony: 'back',
+    sample: 'Hétvégén baseballozunk a parkban. (We play baseball in the park on weekends.)',
+  },
+  {
+    infinitive: 'befejezni',
+    stem: 'befejez',
+    english: 'to finish',
+    harmony: 'front',
+    sample: 'Ma befejezem a projektet. (I finish the project today.)',
+  },
+  {
+    infinitive: 'beszélni',
+    stem: 'beszél',
+    english: 'to speak',
+    harmony: 'front',
+    sample: 'Ő jól beszél angolul. (He/She speaks English well.)',
+  },
+  {
+    infinitive: 'biciklizni',
+    stem: 'bicikliz',
+    english: 'to cycle/bicycle',
+    harmony: 'front',
+    sample: 'Munkába biciklizek. (I bike to work.)',
+  },
+  {
+    infinitive: 'bulizni',
+    stem: 'buliz',
+    english: 'to party',
+    harmony: 'back',
+    sample: 'Szombaton bulizunk. (We party on Saturday.)',
+  },
+  {
+    infinitive: 'csinálni',
+    stem: 'csinál',
+    english: 'to do',
+    harmony: 'back',
+    sample: 'Mit csinálsz ma este? (What are you doing tonight?)',
+  },
+  {
+    infinitive: 'dolgozni',
+    stem: 'dolgoz',
+    english: 'to work',
+    harmony: 'back',
+    sample: 'Otthonról dolgozom. (I work from home.)',
+  },
+  {
+    infinitive: 'élni',
+    stem: 'él',
+    english: 'to live',
+    harmony: 'front',
+    sample: 'Budapesten élek. (I live in Budapest.)',
+  },
+  {
+    infinitive: 'enni',
+    stem: 'esz',
+    english: 'to eat',
+    harmony: 'front',
+    sample: 'Reggel eszek gyümölcsöt. (I eat fruit in the morning.)',
+  },
+  {
+    infinitive: 'építeni',
+    stem: 'épít',
+    english: 'to build',
+    harmony: 'front',
+    sample: 'Új házat építenek. (They build a new house.)',
+  },
+  {
+    infinitive: 'főzni',
+    stem: 'főz',
+    english: 'to cook',
+    harmony: 'mixed',
+    sample: 'Szeretek főzni vacsorát. (I like to cook dinner.)',
+  },
+  {
+    infinitive: 'grillezni',
+    stem: 'grillez',
+    english: 'to bbq/grill',
+    harmony: 'front',
+    sample: 'Nyáron sokat grillezünk. (We grill a lot in summer.)',
+  },
+  {
+    infinitive: 'gyakorolni',
+    stem: 'gyakorol',
+    english: 'to practice',
+    harmony: 'back',
+    sample: 'Minden nap gyakorolok gitáron. (I practice guitar every day.)',
+  },
+  {
+    infinitive: 'hallgatni',
+    stem: 'hallgat',
+    english: 'to listen',
+    harmony: 'back',
+    sample: 'Zenét hallgatok munka közben. (I listen to music while working.)',
+  },
+  {
+    infinitive: 'inni',
+    stem: 'isz',
+    english: 'to drink',
+    harmony: 'front',
+    sample: 'Reggel kávét iszom. (I drink coffee in the morning.)',
+  },
+  {
+    infinitive: 'jógázni',
+    stem: 'jógáz',
+    english: 'to do yoga',
+    harmony: 'back',
+    sample: 'Reggelente jógázok. (I do yoga in the mornings.)',
+  },
+  {
+    infinitive: 'karaokézni',
+    stem: 'karaokéz',
+    english: 'to karaoke',
+    harmony: 'front',
+    sample: 'Barátaimmal karaokézunk. (I do karaoke with my friends.)',
+  },
+  {
+    infinitive: 'kódolni',
+    stem: 'kódol',
+    english: 'to code',
+    harmony: 'back',
+    sample: 'Pythonban kódolok. (I code in Python.)',
+  },
+  {
+    infinitive: 'költözni',
+    stem: 'költöz',
+    english: 'to move to',
+    harmony: 'mixed',
+    sample: 'Jövőre Bécsbe költözünk. (We move to Vienna next year.)',
+  },
+  {
+    infinitive: 'lenni',
+    stem: 'van',
+    english: 'to be',
+    harmony: 'back',
+    sample: 'Boldog vagyok. (I am happy.)',
+  },
+  {
+    infinitive: 'maradni',
+    stem: 'marad',
+    english: 'to stay',
+    harmony: 'back',
+    sample: 'Otthon maradok ma. (I stay home today.)',
+  },
+  {
+    infinitive: 'menni',
+    stem: 'megy',
+    english: 'to go',
+    harmony: 'front',
+    sample: 'Holnap moziba megyek. (I go to the cinema tomorrow.)',
+  },
+  {
+    infinitive: 'nézni',
+    stem: 'néz',
+    english: 'to watch',
+    harmony: 'front',
+    sample: 'Este filmet nézünk. (We watch a movie in the evening.)',
+  },
+  {
+    infinitive: 'partizni',
+    stem: 'partiz',
+    english: 'to party',
+    harmony: 'back',
+    sample: 'Pénteken partiznak. (They party on Friday.)',
+  },
+  {
+    infinitive: 'pihenni',
+    stem: 'pihen',
+    english: 'to relax/rest',
+    harmony: 'front',
+    sample: 'Vasárnap pihenek. (I rest on Sunday.)',
+  },
+  {
+    infinitive: 'programozni',
+    stem: 'programoz',
+    english: 'to program',
+    harmony: 'back',
+    sample: 'Weboldalt programozok. (I program a website.)',
+  },
+  {
+    infinitive: 'sétálni',
+    stem: 'sétál',
+    english: 'to walk',
+    harmony: 'back',
+    sample: 'A parkban sétálok. (I walk in the park.)',
+  },
+  {
+    infinitive: 'sportolni',
+    stem: 'sportol',
+    english: 'to play/do sports',
+    harmony: 'back',
+    sample: 'Hetente háromszor sportolok. (I do sports three times a week.)',
+  },
+  {
+    infinitive: 'sütni',
+    stem: 'süt',
+    english: 'to bake/fry',
+    harmony: 'mixed',
+    sample: 'Sütiket sütök a hétvégén. (I bake cookies on the weekend.)',
+  },
+  {
+    infinitive: 'születni',
+    stem: 'születik',
+    english: 'to be born',
+    harmony: 'front',
+    sample: 'Magyarországon születtem. (I was born in Hungary.)',
+  },
+  {
+    infinitive: 'takarítani',
+    stem: 'takarít',
+    english: 'to clean',
+    harmony: 'back',
+    sample: 'Szombaton takarítok. (I clean on Saturday.)',
+  },
+  {
+    infinitive: 'találkozni',
+    stem: 'találkoz',
+    english: 'to meet',
+    harmony: 'back',
+    sample: 'Barátaimmal találkozom. (I meet with my friends.)',
+  },
+  {
+    infinitive: 'úszni',
+    stem: 'úsz',
+    english: 'to swim',
+    harmony: 'back',
+    sample: 'Nyáron sokat úszom. (I swim a lot in summer.)',
+  },
+  {
+    infinitive: 'utazni',
+    stem: 'utaz',
+    english: 'to travel',
+    harmony: 'back',
+    sample: 'Szeretek utazni. (I like to travel.)',
+  },
+  {
+    infinitive: 'vásárolni',
+    stem: 'vásárol',
+    english: 'to shop',
+    harmony: 'back',
+    sample: 'A piacon vásárolok. (I shop at the market.)',
+  },
+  {
+    infinitive: 'vezetni',
+    stem: 'vezet',
+    english: 'to drive',
+    harmony: 'front',
+    sample: 'Autót vezetek. (I drive a car.)',
+  },
+];
 

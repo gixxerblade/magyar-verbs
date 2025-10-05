@@ -1,30 +1,88 @@
-# React + TypeScript + Vite
+# Magyar Verb Playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive web application for learning Hungarian (Magyar) verb conjugation, focusing on the indefinite present tense for verbs that don't require connecting vowels.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Reference Guide**: Browse comprehensive conjugation patterns and endings for different vowel harmony types (back, front, mixed)
+- **Verb Lab**: Experiment with a library of 48+ Hungarian verbs and see their conjugations across all pronouns (én, te, ő, mi, ti, ők)
+- **Quick Quiz**: Test your knowledge by conjugating random verbs with immediate feedback
+- **Harmony Drill**: Practice identifying vowel harmony patterns in Hungarian verbs
 
-## Expanding the ESLint configuration
+## Vowel Harmony
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Hungarian verbs follow vowel harmony rules that determine which endings to use:
 
-- Configure the top-level `parserOptions` property like this:
+- **Back harmony**: Verbs with back vowels (a, á, o, ó, u, ú) use endings like -ok, -sz, -unk, -tok, -nak
+- **Front harmony**: Verbs with front vowels (e, é, i, í) use endings like -ek, -sz, -ünk, -tek, -nek
+- **Mixed harmony**: Special verbs (containing ö, ő, ü, ű) use endings like -ök, -sz, -ünk, -tök, -nek
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Tech Stack
+
+- **React 19** with TypeScript
+- **Vite** for fast development and building
+- **TanStack Router** for type-safe routing
+- **Tailwind CSS** for styling
+- **Headless UI** for accessible components
+- **Heroicons** for icons
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or bun
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+# or
+bun install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Development
+
+```bash
+# Start development server
+npm run dev
+# or
+bun dev
+```
+
+Visit `http://localhost:5173` to view the app.
+
+### Build
+
+```bash
+# Build for production
+npm run build
+# or
+bun run build
+
+# Preview production build
+npm run preview
+# or
+bun preview
+```
+
+## Project Structure
+
+```text
+src/
+├── data/
+│   └── conjugation.ts    # Verb data and conjugation patterns
+├── pages/                # Page components
+│   ├── reference.tsx
+│   ├── verb-lab.tsx
+│   ├── quiz.tsx
+│   └── harmony-drill.tsx
+├── routes/               # TanStack Router routes
+├── types.ts              # TypeScript types
+└── main.tsx              # Application entry point
+```
+
+## License
+
+This project is open source and available under the MIT License.
