@@ -9,10 +9,19 @@ export const vowelHarmonyLabels: Record<VowelHarmony, string> = {
 };
 
 export const pronounHints: Record<Pronoun, string> = {
-  én: 'First person singular',
-  te: 'Second person singular',
-  ő: 'Third person singular',
-  mi: 'First person plural',
-  ti: 'Second person plural',
-  ők: 'Third person plural'
+  én: '1st person singular',
+  te: '2nd person singular',
+  ő: '3rd person singular',
+  mi: '1st person plural',
+  ti: '2nd person plural',
+  ők: '3rd person plural'
+}
+
+export const pronounExplanations: Record<Pronoun, string> = {
+  én: 'I (the speaker)',
+  te: 'you (one person you\'re talking to)',
+  ő: 'he/she/it (one person or thing being talked about)',
+  mi: 'we (the speaker + others)',
+  ti: 'you all (multiple people you\'re talking to)',
+  ők: 'they (multiple people or things being talked about)'
 }
