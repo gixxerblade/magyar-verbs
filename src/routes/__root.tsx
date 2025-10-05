@@ -34,6 +34,9 @@ function RootComponent() {
           <Link to="/quiz" className="tab" activeOptions={{ exact: false }} activeProps={{ className: 'tab tab--active' }}>
             Quick Quiz
           </Link>
+          <Link to="/flashcards" className="tab" activeOptions={{ exact: false }} activeProps={{ className: 'tab tab--active' }}>
+            Flashcards
+          </Link>
           <Link to="/harmony-drill" className="tab" activeOptions={{ exact: false }} activeProps={{ className: 'tab tab--active' }}>
             Harmony Drill
           </Link>

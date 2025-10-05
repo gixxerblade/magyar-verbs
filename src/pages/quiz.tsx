@@ -35,7 +35,7 @@ export function QuizPage() {
   };
 
   const handleQuizNext = () => {
-    if (quizCompleted) return;
+    if (quizScore.total >= QUIZ_LENGTH) return;
     setQuizSelection(null);
     setQuizQuestion(createQuizQuestion());
   };

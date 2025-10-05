@@ -13,6 +13,7 @@ import { Route as VerbLabRouteImport } from './routes/verb-lab'
 import { Route as ReferenceRouteImport } from './routes/reference'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as HarmonyDrillRouteImport } from './routes/harmony-drill'
+import { Route as FlashcardsRouteImport } from './routes/flashcards'
 import { Route as IndexRouteImport } from './routes/index'
 
 const VerbLabRoute = VerbLabRouteImport.update({
@@ -35,6 +36,11 @@ const HarmonyDrillRoute = HarmonyDrillRouteImport.update({
   path: '/harmony-drill',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FlashcardsRoute = FlashcardsRouteImport.update({
+  id: '/flashcards',
+  path: '/flashcards',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/flashcards': typeof FlashcardsRoute
   '/harmony-drill': typeof HarmonyDrillRoute
   '/quiz': typeof QuizRoute
   '/reference': typeof ReferenceRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/flashcards': typeof FlashcardsRoute
   '/harmony-drill': typeof HarmonyDrillRoute
   '/quiz': typeof QuizRoute
   '/reference': typeof ReferenceRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/flashcards': typeof FlashcardsRoute
   '/harmony-drill': typeof HarmonyDrillRoute
   '/quiz': typeof QuizRoute
   '/reference': typeof ReferenceRoute
@@ -65,14 +74,34 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/harmony-drill' | '/quiz' | '/reference' | '/verb-lab'
+  fullPaths:
+    | '/'
+    | '/flashcards'
+    | '/harmony-drill'
+    | '/quiz'
+    | '/reference'
+    | '/verb-lab'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/harmony-drill' | '/quiz' | '/reference' | '/verb-lab'
-  id: '__root__' | '/' | '/harmony-drill' | '/quiz' | '/reference' | '/verb-lab'
+  to:
+    | '/'
+    | '/flashcards'
+    | '/harmony-drill'
+    | '/quiz'
+    | '/reference'
+    | '/verb-lab'
+  id:
+    | '__root__'
+    | '/'
+    | '/flashcards'
+    | '/harmony-drill'
+    | '/quiz'
+    | '/reference'
+    | '/verb-lab'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FlashcardsRoute: typeof FlashcardsRoute
   HarmonyDrillRoute: typeof HarmonyDrillRoute
   QuizRoute: typeof QuizRoute
   ReferenceRoute: typeof ReferenceRoute
@@ -109,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HarmonyDrillRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/flashcards': {
+      id: '/flashcards'
+      path: '/flashcards'
+      fullPath: '/flashcards'
+      preLoaderRoute: typeof FlashcardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FlashcardsRoute: FlashcardsRoute,
   HarmonyDrillRoute: HarmonyDrillRoute,
   QuizRoute: QuizRoute,
   ReferenceRoute: ReferenceRoute,
