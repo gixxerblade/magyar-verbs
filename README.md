@@ -1,5 +1,8 @@
 # Magyar Learning Playground
 
+[![CI](https://github.com/gixxerblade/magyar-verbs/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/magyar-verbs/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gixxerblade/magyar-verbs/branch/main/graph/badge.svg)](https://codecov.io/gh/YOUR_USERNAME/magyar-verbs)
+
 An interactive web application for learning Hungarian (Magyar) language, featuring verb conjugation practice, vocabulary building, and flashcards. Master Hungarian verb patterns, vowel harmony, and essential vocabulary through engaging exercises and drills.
 
 ## Features
@@ -145,6 +148,21 @@ npm run tsc
 ```
 
 **Important**: All of these commands must pass before committing code.
+
+### Testing
+
+```bash
+# Run all unit tests (103 tests)
+npm run test
+
+# Run tests with UI
+npm run test:ui
+
+# Generate coverage report
+npm run test:coverage
+```
+
+The project has comprehensive unit test coverage for all utility functions. See [TESTING.md](./TESTING.md) for detailed testing documentation.
 
 ### Build
 

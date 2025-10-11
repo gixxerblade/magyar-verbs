@@ -8,105 +8,105 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as VocabularyPracticeRouteImport } from './routes/vocabulary-practice'
-import { Route as VerbLabRouteImport } from './routes/verb-lab'
-import { Route as ReferenceRouteImport } from './routes/reference'
-import { Route as QuizRouteImport } from './routes/quiz'
-import { Route as HarmonyDrillRouteImport } from './routes/harmony-drill'
-import { Route as FlashcardsRouteImport } from './routes/flashcards'
-import { Route as CustomVerbsRouteImport } from './routes/custom-verbs'
-import { Route as AuthRouteImport } from './routes/_auth'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthVocabularyRouteImport } from './routes/_auth.vocabulary'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as AuthRouteImport } from './routes/_auth';
+import { Route as AuthVocabularyRouteImport } from './routes/_auth.vocabulary';
+import { Route as CustomVerbsRouteImport } from './routes/custom-verbs';
+import { Route as FlashcardsRouteImport } from './routes/flashcards';
+import { Route as HarmonyDrillRouteImport } from './routes/harmony-drill';
+import { Route as IndexRouteImport } from './routes/index';
+import { Route as QuizRouteImport } from './routes/quiz';
+import { Route as ReferenceRouteImport } from './routes/reference';
+import { Route as VerbLabRouteImport } from './routes/verb-lab';
+import { Route as VocabularyPracticeRouteImport } from './routes/vocabulary-practice';
 
 const VocabularyPracticeRoute = VocabularyPracticeRouteImport.update({
   id: '/vocabulary-practice',
   path: '/vocabulary-practice',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const VerbLabRoute = VerbLabRouteImport.update({
   id: '/verb-lab',
   path: '/verb-lab',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ReferenceRoute = ReferenceRouteImport.update({
   id: '/reference',
   path: '/reference',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const QuizRoute = QuizRouteImport.update({
   id: '/quiz',
   path: '/quiz',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const HarmonyDrillRoute = HarmonyDrillRouteImport.update({
   id: '/harmony-drill',
   path: '/harmony-drill',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const FlashcardsRoute = FlashcardsRouteImport.update({
   id: '/flashcards',
   path: '/flashcards',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const CustomVerbsRoute = CustomVerbsRouteImport.update({
   id: '/custom-verbs',
   path: '/custom-verbs',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const AuthVocabularyRoute = AuthVocabularyRouteImport.update({
   id: '/vocabulary',
   path: '/vocabulary',
   getParentRoute: () => AuthRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/custom-verbs': typeof CustomVerbsRoute
-  '/flashcards': typeof FlashcardsRoute
-  '/harmony-drill': typeof HarmonyDrillRoute
-  '/quiz': typeof QuizRoute
-  '/reference': typeof ReferenceRoute
-  '/verb-lab': typeof VerbLabRoute
-  '/vocabulary-practice': typeof VocabularyPracticeRoute
-  '/vocabulary': typeof AuthVocabularyRoute
+  '/': typeof IndexRoute;
+  '/custom-verbs': typeof CustomVerbsRoute;
+  '/flashcards': typeof FlashcardsRoute;
+  '/harmony-drill': typeof HarmonyDrillRoute;
+  '/quiz': typeof QuizRoute;
+  '/reference': typeof ReferenceRoute;
+  '/verb-lab': typeof VerbLabRoute;
+  '/vocabulary-practice': typeof VocabularyPracticeRoute;
+  '/vocabulary': typeof AuthVocabularyRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/custom-verbs': typeof CustomVerbsRoute
-  '/flashcards': typeof FlashcardsRoute
-  '/harmony-drill': typeof HarmonyDrillRoute
-  '/quiz': typeof QuizRoute
-  '/reference': typeof ReferenceRoute
-  '/verb-lab': typeof VerbLabRoute
-  '/vocabulary-practice': typeof VocabularyPracticeRoute
-  '/vocabulary': typeof AuthVocabularyRoute
+  '/': typeof IndexRoute;
+  '/custom-verbs': typeof CustomVerbsRoute;
+  '/flashcards': typeof FlashcardsRoute;
+  '/harmony-drill': typeof HarmonyDrillRoute;
+  '/quiz': typeof QuizRoute;
+  '/reference': typeof ReferenceRoute;
+  '/verb-lab': typeof VerbLabRoute;
+  '/vocabulary-practice': typeof VocabularyPracticeRoute;
+  '/vocabulary': typeof AuthVocabularyRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/custom-verbs': typeof CustomVerbsRoute
-  '/flashcards': typeof FlashcardsRoute
-  '/harmony-drill': typeof HarmonyDrillRoute
-  '/quiz': typeof QuizRoute
-  '/reference': typeof ReferenceRoute
-  '/verb-lab': typeof VerbLabRoute
-  '/vocabulary-practice': typeof VocabularyPracticeRoute
-  '/_auth/vocabulary': typeof AuthVocabularyRoute
+  __root__: typeof rootRouteImport;
+  '/': typeof IndexRoute;
+  '/_auth': typeof AuthRouteWithChildren;
+  '/custom-verbs': typeof CustomVerbsRoute;
+  '/flashcards': typeof FlashcardsRoute;
+  '/harmony-drill': typeof HarmonyDrillRoute;
+  '/quiz': typeof QuizRoute;
+  '/reference': typeof ReferenceRoute;
+  '/verb-lab': typeof VerbLabRoute;
+  '/vocabulary-practice': typeof VocabularyPracticeRoute;
+  '/_auth/vocabulary': typeof AuthVocabularyRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
     | '/custom-verbs'
@@ -116,8 +116,8 @@ export interface FileRouteTypes {
     | '/reference'
     | '/verb-lab'
     | '/vocabulary-practice'
-    | '/vocabulary'
-  fileRoutesByTo: FileRoutesByTo
+    | '/vocabulary';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
     | '/custom-verbs'
@@ -127,7 +127,7 @@ export interface FileRouteTypes {
     | '/reference'
     | '/verb-lab'
     | '/vocabulary-practice'
-    | '/vocabulary'
+    | '/vocabulary';
   id:
     | '__root__'
     | '/'
@@ -139,105 +139,105 @@ export interface FileRouteTypes {
     | '/reference'
     | '/verb-lab'
     | '/vocabulary-practice'
-    | '/_auth/vocabulary'
-  fileRoutesById: FileRoutesById
+    | '/_auth/vocabulary';
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRouteWithChildren
-  CustomVerbsRoute: typeof CustomVerbsRoute
-  FlashcardsRoute: typeof FlashcardsRoute
-  HarmonyDrillRoute: typeof HarmonyDrillRoute
-  QuizRoute: typeof QuizRoute
-  ReferenceRoute: typeof ReferenceRoute
-  VerbLabRoute: typeof VerbLabRoute
-  VocabularyPracticeRoute: typeof VocabularyPracticeRoute
+  IndexRoute: typeof IndexRoute;
+  AuthRoute: typeof AuthRouteWithChildren;
+  CustomVerbsRoute: typeof CustomVerbsRoute;
+  FlashcardsRoute: typeof FlashcardsRoute;
+  HarmonyDrillRoute: typeof HarmonyDrillRoute;
+  QuizRoute: typeof QuizRoute;
+  ReferenceRoute: typeof ReferenceRoute;
+  VerbLabRoute: typeof VerbLabRoute;
+  VocabularyPracticeRoute: typeof VocabularyPracticeRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/vocabulary-practice': {
-      id: '/vocabulary-practice'
-      path: '/vocabulary-practice'
-      fullPath: '/vocabulary-practice'
-      preLoaderRoute: typeof VocabularyPracticeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/vocabulary-practice';
+      path: '/vocabulary-practice';
+      fullPath: '/vocabulary-practice';
+      preLoaderRoute: typeof VocabularyPracticeRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/verb-lab': {
-      id: '/verb-lab'
-      path: '/verb-lab'
-      fullPath: '/verb-lab'
-      preLoaderRoute: typeof VerbLabRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/verb-lab';
+      path: '/verb-lab';
+      fullPath: '/verb-lab';
+      preLoaderRoute: typeof VerbLabRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/reference': {
-      id: '/reference'
-      path: '/reference'
-      fullPath: '/reference'
-      preLoaderRoute: typeof ReferenceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/reference';
+      path: '/reference';
+      fullPath: '/reference';
+      preLoaderRoute: typeof ReferenceRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/quiz': {
-      id: '/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof QuizRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/quiz';
+      path: '/quiz';
+      fullPath: '/quiz';
+      preLoaderRoute: typeof QuizRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/harmony-drill': {
-      id: '/harmony-drill'
-      path: '/harmony-drill'
-      fullPath: '/harmony-drill'
-      preLoaderRoute: typeof HarmonyDrillRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/harmony-drill';
+      path: '/harmony-drill';
+      fullPath: '/harmony-drill';
+      preLoaderRoute: typeof HarmonyDrillRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/flashcards': {
-      id: '/flashcards'
-      path: '/flashcards'
-      fullPath: '/flashcards'
-      preLoaderRoute: typeof FlashcardsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/flashcards';
+      path: '/flashcards';
+      fullPath: '/flashcards';
+      preLoaderRoute: typeof FlashcardsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/custom-verbs': {
-      id: '/custom-verbs'
-      path: '/custom-verbs'
-      fullPath: '/custom-verbs'
-      preLoaderRoute: typeof CustomVerbsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/custom-verbs';
+      path: '/custom-verbs';
+      fullPath: '/custom-verbs';
+      preLoaderRoute: typeof CustomVerbsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/_auth';
+      path: '';
+      fullPath: '';
+      preLoaderRoute: typeof AuthRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/_auth/vocabulary': {
-      id: '/_auth/vocabulary'
-      path: '/vocabulary'
-      fullPath: '/vocabulary'
-      preLoaderRoute: typeof AuthVocabularyRouteImport
-      parentRoute: typeof AuthRoute
-    }
+      id: '/_auth/vocabulary';
+      path: '/vocabulary';
+      fullPath: '/vocabulary';
+      preLoaderRoute: typeof AuthVocabularyRouteImport;
+      parentRoute: typeof AuthRoute;
+    };
   }
 }
 
 interface AuthRouteChildren {
-  AuthVocabularyRoute: typeof AuthVocabularyRoute
+  AuthVocabularyRoute: typeof AuthVocabularyRoute;
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthVocabularyRoute: AuthVocabularyRoute,
-}
+};
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -249,7 +249,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReferenceRoute: ReferenceRoute,
   VerbLabRoute: VerbLabRoute,
   VocabularyPracticeRoute: VocabularyPracticeRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
