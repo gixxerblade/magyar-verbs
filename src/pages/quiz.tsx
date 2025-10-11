@@ -1,20 +1,23 @@
 import {
-  SparklesIcon,
-  CheckCircleIcon,
-  XCircleIcon,
   ArrowPathIcon,
+  CheckCircleIcon,
+  SparklesIcon,
+  XCircleIcon,
 } from '@heroicons/react/24/outline';
-import { classNames, buildConjugation } from '../utils/utils';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { createQuizQuestion } from '../utils/createQuizQuestion';
-import { QuizQuestion } from '../types';
-import { indefinitePatterns } from '../data/conjugation';
 import { pronounHints } from '../contants';
+import { indefinitePatterns } from '../data/conjugation';
+import { customVerbsQueryOptions } from '../hooks/useCustomVerbs';
+import type { QuizQuestion } from '../types';
+import { createQuizQuestion } from '../utils/createQuizQuestion';
+import { buildConjugation, classNames } from '../utils/utils';
 
 const QUIZ_LENGTH = 8;
 
 export function QuizPage() {
-  const [quizQuestion, setQuizQuestion] = useState<QuizQuestion>(() => createQuizQuestion());
+  const { data: verbs } = useSuspenseQuery(customVerbsQueryOptions);
+  const [quizQuestion, setQuizQuestion] = useState<QuizQuestion>(() => createQuizQuestion(verbs));
   const [quizSelection, setQuizSelection] = useState<string | null>(null);
   const [quizScore, setQuizScore] = useState({ correct: 0, total: 0 });
   const [quizCompleted, setQuizCompleted] = useState(false);
@@ -22,7 +25,7 @@ export function QuizPage() {
   const quizIsCorrect = quizSelection === quizQuestion.answer;
 
   // Get English pronoun and verb for the hint
-  const pattern = indefinitePatterns.find(p => p.pronoun === quizQuestion.pronoun);
+  const pattern = indefinitePatterns.find((p) => p.pronoun === quizQuestion.pronoun);
   const englishPronoun = pattern?.english || '';
   const verbBase = quizQuestion.verb.english.replace(/^to /, '');
   const quizHint = `${pronounHints[quizQuestion.pronoun]} · ${englishPronoun} ${verbBase}`;
@@ -30,7 +33,7 @@ export function QuizPage() {
   const handleQuizPick = (option: string) => {
     if (quizAnswered || quizCompleted) return;
     setQuizSelection(option);
-    setQuizScore(score => {
+    setQuizScore((score) => {
       const next = {
         correct: score.correct + (option === quizQuestion.answer ? 1 : 0),
         total: score.total + 1,
@@ -45,12 +48,12 @@ export function QuizPage() {
   const handleQuizNext = () => {
     if (quizScore.total >= QUIZ_LENGTH) return;
     setQuizSelection(null);
-    setQuizQuestion(createQuizQuestion());
+    setQuizQuestion(createQuizQuestion(verbs));
   };
 
   const handleQuizReset = () => {
     setQuizSelection(null);
-    setQuizQuestion(createQuizQuestion());
+    setQuizQuestion(createQuizQuestion(verbs));
     setQuizScore({ correct: 0, total: 0 });
     setQuizCompleted(false);
   };
@@ -80,15 +83,18 @@ export function QuizPage() {
             </span>
           </div>
           <div className='quiz__options'>
-            {quizQuestion.options.map(option => {
+            {quizQuestion.options.map((option) => {
               const selected = quizSelection === option;
-              const status = quizAnswered
-                ? option === quizQuestion.answer
-                  ? 'correct'
-                  : selected
-                    ? 'incorrect'
-                    : 'idle'
-                : 'idle';
+
+              // Determine option status based on quiz state
+              let status = 'idle';
+              if (quizAnswered) {
+                if (option === quizQuestion.answer) {
+                  status = 'correct';
+                } else if (selected) {
+                  status = 'incorrect';
+                }
+              }
 
               return (
                 <button

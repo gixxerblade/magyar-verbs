@@ -1,27 +1,30 @@
-import { RadioGroup, Radio } from '@headlessui/react';
+import { Radio, RadioGroup } from '@headlessui/react';
 import {
-  LightBulbIcon,
-  CheckCircleIcon,
-  XCircleIcon,
   ArrowPathIcon,
+  CheckCircleIcon,
+  LightBulbIcon,
+  XCircleIcon,
 } from '@heroicons/react/24/outline';
-import { pronounHints, vowelHarmonyLabels } from '../contants';
-import { HarmonyChallenge, VowelHarmony } from '../types';
-import { classNames, getEndingDescription } from '../utils/utils';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { createHarmonyChallenge } from '../utils/createHarmonyChallenge';
+import { pronounHints, vowelHarmonyLabels } from '../contants';
 import { indefinitePatterns } from '../data/conjugation';
+import { customVerbsQueryOptions } from '../hooks/useCustomVerbs';
+import type { HarmonyChallenge, VowelHarmony } from '../types';
+import { createHarmonyChallenge } from '../utils/createHarmonyChallenge';
+import { classNames, getEndingDescription } from '../utils/utils';
 
 export function HarmonyDrillPage() {
+  const { data: verbs } = useSuspenseQuery(customVerbsQueryOptions);
   const [harmonyChallenge, setHarmonyChallenge] = useState<HarmonyChallenge>(() =>
-    createHarmonyChallenge()
+    createHarmonyChallenge(verbs)
   );
   const [harmonyChoice, setHarmonyChoice] = useState<VowelHarmony | null>(null);
   const [harmonyFeedback, setHarmonyFeedback] = useState<'correct' | 'incorrect' | null>(null);
   const harmonyAnswered = harmonyChoice !== null;
 
   // Get English pronoun and verb for the hint
-  const pattern = indefinitePatterns.find(p => p.pronoun === harmonyChallenge.pronoun);
+  const pattern = indefinitePatterns.find((p) => p.pronoun === harmonyChallenge.pronoun);
   const englishPronoun = pattern?.english || '';
   const verbBase = harmonyChallenge.verb.english.replace(/^to /, '');
   const targetHint = `${pronounHints[harmonyChallenge.pronoun]} - ${englishPronoun} ${verbBase}`;
@@ -39,7 +42,7 @@ export function HarmonyDrillPage() {
   const handleHarmonyNext = () => {
     setHarmonyChoice(null);
     setHarmonyFeedback(null);
-    setHarmonyChallenge(createHarmonyChallenge());
+    setHarmonyChallenge(createHarmonyChallenge(verbs));
   };
 
   return (
@@ -69,7 +72,7 @@ export function HarmonyDrillPage() {
           >
             <RadioGroup.Label className='sr-only'>Choose vowel harmony</RadioGroup.Label>
             <div className='harmony-card__choice-grid'>
-              {(Object.keys(vowelHarmonyLabels) as VowelHarmony[]).map(key => {
+              {(Object.keys(vowelHarmonyLabels) as VowelHarmony[]).map((key) => {
                 const isCorrectAnswer = key === harmonyChallenge.verb.harmony;
                 const isSelected = harmonyChoice === key;
 
@@ -122,7 +125,7 @@ export function HarmonyDrillPage() {
                 )}
               </div>
               <button type='button' className='quiz__next' onClick={handleHarmonyNext}>
-                <ArrowPathIcon color="white" className="w-4 h-4" />{' '}Next
+                <ArrowPathIcon color='white' className='w-4 h-4' /> Next
               </button>
             </div>
           ) : null}

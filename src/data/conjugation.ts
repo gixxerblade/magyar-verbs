@@ -1,5 +1,4 @@
-import { ConjugationPattern, VerbEntry } from '../types';
-
+import type { ConjugationPattern, VerbEntry } from '../types';
 
 export const indefinitePatterns: ConjugationPattern[] = [
   {
@@ -364,4 +363,3 @@ export const sampleVerbs: VerbEntry[] = [
     sample: 'Autót vezetek. (I drive a car.)',
   },
 ];
-

@@ -1,10 +1,9 @@
 import { pronounOrder } from '../contants';
-import { sampleVerbs } from '../data/conjugation';
-import { HarmonyChallenge, Pronoun } from '../types';
-import { randomItem, buildConjugation } from './utils';
+import type { HarmonyChallenge, Pronoun, VerbEntry } from '../types';
+import { buildConjugation, randomItem } from './utils';
 
-export function createHarmonyChallenge(): HarmonyChallenge {
-  const verb = randomItem(sampleVerbs);
+export function createHarmonyChallenge(verbs: VerbEntry[]): HarmonyChallenge {
+  const verb = randomItem(verbs);
   const pronounPool = pronounOrder.filter((item): item is Pronoun => item !== 'ő');
   const pronoun = randomItem(pronounPool);
   return {

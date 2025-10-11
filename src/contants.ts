@@ -1,4 +1,4 @@
-import { Pronoun, VowelHarmony } from './types';
+import type { Pronoun, VowelHarmony } from './types';
 
 export const pronounOrder = ['én', 'te', 'ő', 'mi', 'ti', 'ők'] as const;
 
@@ -14,14 +14,14 @@ export const pronounHints: Record<Pronoun, string> = {
   ő: '3rd person singular',
   mi: '1st person plural',
   ti: '2nd person plural',
-  ők: '3rd person plural'
-}
+  ők: '3rd person plural',
+};
 
 export const pronounExplanations: Record<Pronoun, string> = {
   én: 'I (the speaker)',
-  te: 'you (one person you\'re talking to)',
+  te: "you (one person you're talking to)",
   ő: 'he/she/it (one person or thing being talked about)',
   mi: 'we (the speaker + others)',
-  ti: 'you all (multiple people you\'re talking to)',
-  ők: 'they (multiple people or things being talked about)'
-}
+  ti: "you all (multiple people you're talking to)",
+  ők: 'they (multiple people or things being talked about)',
+};

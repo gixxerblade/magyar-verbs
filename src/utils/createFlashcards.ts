@@ -1,5 +1,6 @@
-import { pronounOrder, pronounHints } from '../contants';
-import { indefinitePatterns, sampleVerbs } from '../data/conjugation';
+import { pronounHints, pronounOrder } from '../contants';
+import { indefinitePatterns } from '../data/conjugation';
+import type { VerbEntry } from '../types';
 import { buildConjugation, shuffle } from './utils';
 
 export interface Flashcard {
@@ -8,11 +9,11 @@ export interface Flashcard {
   type: 'conjugation' | 'infinitive';
 }
 
-export function createFlashcards(): Flashcard[] {
+export function createFlashcards(verbs: VerbEntry[]): Flashcard[] {
   const flashcards: Flashcard[] = [];
 
   // Create flashcards for each verb
-  sampleVerbs.forEach(verb => {
+  verbs.forEach((verb) => {
     // Add infinitive card
     flashcards.push({
       front: verb.infinitive,
@@ -21,9 +22,9 @@ export function createFlashcards(): Flashcard[] {
     });
 
     // Add conjugation cards for each pronoun
-    pronounOrder.forEach(pronoun => {
+    pronounOrder.forEach((pronoun) => {
       const conjugation = buildConjugation(verb, pronoun);
-      const pattern = indefinitePatterns.find(p => p.pronoun === pronoun);
+      const pattern = indefinitePatterns.find((p) => p.pronoun === pronoun);
       const englishPronoun = pattern?.english || '';
 
       // Convert "to verb" to conjugated form (e.g., "to party" → "party")

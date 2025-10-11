@@ -9,13 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VocabularyPracticeRouteImport } from './routes/vocabulary-practice'
 import { Route as VerbLabRouteImport } from './routes/verb-lab'
 import { Route as ReferenceRouteImport } from './routes/reference'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as HarmonyDrillRouteImport } from './routes/harmony-drill'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
+import { Route as CustomVerbsRouteImport } from './routes/custom-verbs'
+import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthVocabularyRouteImport } from './routes/_auth.vocabulary'
 
+const VocabularyPracticeRoute = VocabularyPracticeRouteImport.update({
+  id: '/vocabulary-practice',
+  path: '/vocabulary-practice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerbLabRoute = VerbLabRouteImport.update({
   id: '/verb-lab',
   path: '/verb-lab',
@@ -41,75 +50,119 @@ const FlashcardsRoute = FlashcardsRouteImport.update({
   path: '/flashcards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomVerbsRoute = CustomVerbsRouteImport.update({
+  id: '/custom-verbs',
+  path: '/custom-verbs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthVocabularyRoute = AuthVocabularyRouteImport.update({
+  id: '/vocabulary',
+  path: '/vocabulary',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/custom-verbs': typeof CustomVerbsRoute
   '/flashcards': typeof FlashcardsRoute
   '/harmony-drill': typeof HarmonyDrillRoute
   '/quiz': typeof QuizRoute
   '/reference': typeof ReferenceRoute
   '/verb-lab': typeof VerbLabRoute
+  '/vocabulary-practice': typeof VocabularyPracticeRoute
+  '/vocabulary': typeof AuthVocabularyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/custom-verbs': typeof CustomVerbsRoute
   '/flashcards': typeof FlashcardsRoute
   '/harmony-drill': typeof HarmonyDrillRoute
   '/quiz': typeof QuizRoute
   '/reference': typeof ReferenceRoute
   '/verb-lab': typeof VerbLabRoute
+  '/vocabulary-practice': typeof VocabularyPracticeRoute
+  '/vocabulary': typeof AuthVocabularyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
+  '/custom-verbs': typeof CustomVerbsRoute
   '/flashcards': typeof FlashcardsRoute
   '/harmony-drill': typeof HarmonyDrillRoute
   '/quiz': typeof QuizRoute
   '/reference': typeof ReferenceRoute
   '/verb-lab': typeof VerbLabRoute
+  '/vocabulary-practice': typeof VocabularyPracticeRoute
+  '/_auth/vocabulary': typeof AuthVocabularyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/custom-verbs'
     | '/flashcards'
     | '/harmony-drill'
     | '/quiz'
     | '/reference'
     | '/verb-lab'
+    | '/vocabulary-practice'
+    | '/vocabulary'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/custom-verbs'
     | '/flashcards'
     | '/harmony-drill'
     | '/quiz'
     | '/reference'
     | '/verb-lab'
+    | '/vocabulary-practice'
+    | '/vocabulary'
   id:
     | '__root__'
     | '/'
+    | '/_auth'
+    | '/custom-verbs'
     | '/flashcards'
     | '/harmony-drill'
     | '/quiz'
     | '/reference'
     | '/verb-lab'
+    | '/vocabulary-practice'
+    | '/_auth/vocabulary'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
+  CustomVerbsRoute: typeof CustomVerbsRoute
   FlashcardsRoute: typeof FlashcardsRoute
   HarmonyDrillRoute: typeof HarmonyDrillRoute
   QuizRoute: typeof QuizRoute
   ReferenceRoute: typeof ReferenceRoute
   VerbLabRoute: typeof VerbLabRoute
+  VocabularyPracticeRoute: typeof VocabularyPracticeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vocabulary-practice': {
+      id: '/vocabulary-practice'
+      path: '/vocabulary-practice'
+      fullPath: '/vocabulary-practice'
+      preLoaderRoute: typeof VocabularyPracticeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verb-lab': {
       id: '/verb-lab'
       path: '/verb-lab'
@@ -145,6 +198,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FlashcardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/custom-verbs': {
+      id: '/custom-verbs'
+      path: '/custom-verbs'
+      fullPath: '/custom-verbs'
+      preLoaderRoute: typeof CustomVerbsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -152,16 +219,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth/vocabulary': {
+      id: '/_auth/vocabulary'
+      path: '/vocabulary'
+      fullPath: '/vocabulary'
+      preLoaderRoute: typeof AuthVocabularyRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
 
+interface AuthRouteChildren {
+  AuthVocabularyRoute: typeof AuthVocabularyRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthVocabularyRoute: AuthVocabularyRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
+  CustomVerbsRoute: CustomVerbsRoute,
   FlashcardsRoute: FlashcardsRoute,
   HarmonyDrillRoute: HarmonyDrillRoute,
   QuizRoute: QuizRoute,
   ReferenceRoute: ReferenceRoute,
   VerbLabRoute: VerbLabRoute,
+  VocabularyPracticeRoute: VocabularyPracticeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,21 +1,38 @@
 import { RadioGroup } from '@headlessui/react';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { sampleVerbs } from '../data/conjugation';
-import { buildConjugation, classNames, getEndingDescription } from '../utils/utils';
 import { pronounOrder, vowelHarmonyLabels } from '../contants';
-import { VerbEntry } from '../types';
+import { customVerbsQueryOptions } from '../hooks/useCustomVerbs';
+import type { VerbEntry } from '../types';
+import { buildConjugation, classNames, getEndingDescription } from '../utils/utils';
 
 export function VerbLab() {
-  const [selectedVerb, setSelectedVerb] = useState<VerbEntry>(sampleVerbs[0]);
+  const { data: verbs } = useSuspenseQuery(customVerbsQueryOptions);
+  const [selectedVerb, setSelectedVerb] = useState<VerbEntry>(verbs[0]);
 
   const selectedVerbConjugations = useMemo(() => {
-    return pronounOrder.map(pronoun => ({
+    return pronounOrder.map((pronoun) => ({
       pronoun,
       form: buildConjugation(selectedVerb, pronoun),
       ending: getEndingDescription(pronoun, selectedVerb.harmony),
     }));
   }, [selectedVerb]);
+
+  if (!verbs || verbs.length === 0) {
+    return (
+      <div className='panel'>
+        <section className='panel__section'>
+          <h2>
+            <AcademicCapIcon aria-hidden='true' /> Conjugation Lab
+          </h2>
+          <p className='section-intro'>
+            No custom verbs found. Please add some verbs in the Custom Verbs page first.
+          </p>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className='panel'>
@@ -30,9 +47,9 @@ export function VerbLab() {
         <RadioGroup value={selectedVerb} onChange={setSelectedVerb} className='verb-picker'>
           <RadioGroup.Label className='sr-only'>Select a verb</RadioGroup.Label>
           <div className='verb-picker__grid'>
-            {sampleVerbs.map(verb => (
+            {verbs.map((verb) => (
               <RadioGroup.Option
-                key={verb.infinitive}
+                key={verb.id}
                 value={verb}
                 className={({ checked }) => classNames('verb-card', checked && 'verb-card--active')}
               >
@@ -49,7 +66,7 @@ export function VerbLab() {
         </RadioGroup>
 
         <div className='conjugation-grid'>
-          {selectedVerbConjugations.map(item => (
+          {selectedVerbConjugations.map((item) => (
             <div key={item.pronoun} className='conjugation-card'>
               <p className='conjugation-card__pronoun'>{item.pronoun}</p>
               <p className='conjugation-card__form'>{item.form}</p>

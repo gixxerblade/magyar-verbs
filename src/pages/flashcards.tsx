@@ -1,15 +1,18 @@
 import {
-  SparklesIcon,
-  ArrowPathIcon,
   ArrowLeftIcon,
+  ArrowPathIcon,
   ArrowRightIcon,
+  SparklesIcon,
 } from '@heroicons/react/24/outline';
-import { useState, useMemo } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
+import { customVerbsQueryOptions } from '../hooks/useCustomVerbs';
 import { createFlashcards } from '../utils/createFlashcards';
 import { classNames } from '../utils/utils';
 
 export function FlashcardsPage() {
-  const flashcards = useMemo(() => createFlashcards(), []);
+  const { data: verbs } = useSuspenseQuery(customVerbsQueryOptions);
+  const flashcards = useMemo(() => createFlashcards(verbs), [verbs]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -47,8 +50,7 @@ export function FlashcardsPage() {
           <SparklesIcon aria-hidden='true' /> Flashcards
         </h2>
         <p className='section-intro'>
-          Practice Hungarian verb conjugations and infinitives. Click the card to reveal the
-          answer.
+          Practice Hungarian verb conjugations and infinitives. Click the card to reveal the answer.
         </p>
         <div className='flashcard-wrapper'>
           <div className='flashcard-progress'>{progress}</div>
