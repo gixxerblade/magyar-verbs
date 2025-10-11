@@ -72,13 +72,13 @@ To enable code coverage reporting:
 
 If you don't want Codecov integration, the workflow will still run successfully (coverage upload is set to `fail_ci_if_error: false`).
 
-### 3. Update README Badges
+### 3. Update README Badges ✅
 
-Replace `YOUR_USERNAME` in the README.md badges with your GitHub username:
+The README badges have been configured with your GitHub username (`gixxerblade`):
 
 ```markdown
-[![CI](https://github.com/YOUR_USERNAME/magyar-verbs/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/magyar-verbs/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/YOUR_USERNAME/magyar-verbs/branch/main/graph/badge.svg)](https://codecov.io/gh/YOUR_USERNAME/magyar-verbs)
+[![CI](https://github.com/gixxerblade/magyar-verbs/actions/workflows/ci.yml/badge.svg)](https://github.com/gixxerblade/magyar-verbs/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gixxerblade/magyar-verbs/branch/main/graph/badge.svg)](https://codecov.io/gh/gixxerblade/magyar-verbs)
 ```
 
 ## Local Development
