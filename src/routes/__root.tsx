@@ -64,6 +64,12 @@ function RootComponent() {
           </Link>
           <Link
             to='/flashcards'
+            search={{
+              type: 'all',
+              category: 'all',
+              difficulty: 'all',
+              partOfSpeech: 'all',
+            }}
             className='tab'
             activeOptions={{ exact: false }}
             activeProps={{ className: 'tab tab--active' }}

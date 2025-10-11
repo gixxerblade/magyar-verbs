@@ -18,7 +18,7 @@ const baseVocabularyFormSchema = z.object({
     'nature-animals',
   ]),
   difficulty: z.enum(['beginner', 'intermediate', 'advanced']),
-  partOfSpeech: z.enum(['noun', 'adjective', 'adverb', 'verb', 'other']),
+  partOfSpeech: z.enum(['noun', 'adjective', 'adverb', 'verb', 'phrase', 'other']),
   notes: z.string().optional(),
   exampleSentence: z.string().optional(),
 });

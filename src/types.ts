@@ -51,7 +51,7 @@ export type VocabularyCategory =
 
 export type VocabularyDifficulty = 'beginner' | 'intermediate' | 'advanced';
 
-export type VocabularyPartOfSpeech = 'noun' | 'adjective' | 'adverb' | 'verb' | 'other';
+export type VocabularyPartOfSpeech = 'noun' | 'adjective' | 'adverb' | 'verb' | 'phrase' | 'other';
 
 export interface VocabularyEntry {
   id?: string;

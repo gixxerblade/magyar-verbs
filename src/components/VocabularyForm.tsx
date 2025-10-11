@@ -41,6 +41,7 @@ const PART_OF_SPEECH_OPTIONS = [
   { value: 'verb', label: 'Verb', icon: '⚡' },
   { value: 'adjective', label: 'Adjective', icon: '🎨' },
   { value: 'adverb', label: 'Adverb', icon: '🔄' },
+  { value: 'phrase', label: 'Phrase', icon: '💬' },
   { value: 'other', label: 'Other', icon: '📌' },
 ] as const;
 

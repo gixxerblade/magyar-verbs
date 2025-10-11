@@ -1,15 +1,18 @@
 import { pronounHints, pronounOrder } from '../contants';
 import { indefinitePatterns } from '../data/conjugation';
-import type { VerbEntry } from '../types';
+import type { VerbEntry, VocabularyCategory, VocabularyEntry } from '../types';
 import { buildConjugation, shuffle } from './utils';
 
 export interface Flashcard {
   front: string;
   back: string;
-  type: 'conjugation' | 'infinitive';
+  type: 'conjugation' | 'infinitive' | 'vocabulary';
+  category?: VocabularyCategory;
+  difficulty?: string;
+  partOfSpeech?: string;
 }
 
-export function createFlashcards(verbs: VerbEntry[]): Flashcard[] {
+export function createVerbFlashcards(verbs: VerbEntry[]): Flashcard[] {
   const flashcards: Flashcard[] = [];
 
   // Create flashcards for each verb
@@ -38,5 +41,25 @@ export function createFlashcards(verbs: VerbEntry[]): Flashcard[] {
     });
   });
 
-  return shuffle(flashcards);
+  return flashcards;
+}
+
+export function createVocabularyFlashcards(vocabulary: VocabularyEntry[]): Flashcard[] {
+  return vocabulary.map((entry) => ({
+    front: entry.hungarian,
+    back: entry.english,
+    type: 'vocabulary' as const,
+    category: entry.category,
+    difficulty: entry.difficulty,
+    partOfSpeech: entry.partOfSpeech,
+  }));
+}
+
+export function createAllFlashcards(
+  verbs: VerbEntry[],
+  vocabulary: VocabularyEntry[]
+): Flashcard[] {
+  const verbCards = createVerbFlashcards(verbs);
+  const vocabCards = createVocabularyFlashcards(vocabulary);
+  return shuffle([...verbCards, ...vocabCards]);
 }
