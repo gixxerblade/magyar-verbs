@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import type { VocabularyEntry } from '../types';
+import {z} from 'zod';
+import type {VocabularyEntry} from '../types';
 
 // Base vocabulary form validation schema
 const baseVocabularyFormSchema = z.object({

@@ -1,4 +1,4 @@
-import type { ConjugationPattern, VerbEntry } from '../types';
+import type {ConjugationPattern, VerbEntry} from '../types';
 
 export const indefinitePatterns: ConjugationPattern[] = [
   {

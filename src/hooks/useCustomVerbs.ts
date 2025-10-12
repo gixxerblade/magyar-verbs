@@ -1,4 +1,4 @@
-import { queryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {queryOptions, useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import {
   addDoc,
@@ -11,11 +11,11 @@ import {
   Timestamp,
   updateDoc,
 } from 'firebase/firestore';
-import { db } from '../lib/firebase';
-import { queryKeys } from '../lib/queryKeys';
-import type { VerbFormData } from '../schemas/verb.schema';
-import type { VerbEntry } from '../types';
-import { convertFirestoreTimestamps } from '../utils/firestore';
+import {db} from '../lib/firebase';
+import {queryKeys} from '../lib/queryKeys';
+import type {VerbFormData} from '../schemas/verb.schema';
+import type {VerbEntry} from '../types';
+import {convertFirestoreTimestamps} from '../utils/firestore';
 
 const CUSTOM_VERBS_COLLECTION = 'customVerbs';
 
@@ -83,7 +83,7 @@ export function useAddCustomVerb() {
   return useMutation({
     mutationFn: addCustomVerb,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.customVerbs.all.queryKey });
+      queryClient.invalidateQueries({queryKey: queryKeys.customVerbs.all.queryKey});
     },
   });
 }
@@ -93,10 +93,10 @@ export function useUpdateCustomVerb() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<VerbFormData> }) =>
+    mutationFn: ({id, data}: {id: string; data: Partial<VerbFormData>}) =>
       updateCustomVerb(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.customVerbs.all.queryKey });
+      queryClient.invalidateQueries({queryKey: queryKeys.customVerbs.all.queryKey});
     },
   });
 }
@@ -108,7 +108,7 @@ export function useDeleteCustomVerb() {
   return useMutation({
     mutationFn: deleteCustomVerb,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.customVerbs.all.queryKey });
+      queryClient.invalidateQueries({queryKey: queryKeys.customVerbs.all.queryKey});
     },
   });
 }

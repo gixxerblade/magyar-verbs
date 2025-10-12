@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import type { Timestamp } from 'firebase/firestore';
+import type {Timestamp} from 'firebase/firestore';
 
 /**
  * Convert Firestore Timestamp fields to JavaScript Date objects

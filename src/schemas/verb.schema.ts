@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import type { VerbEntry } from '../types';
+import {z} from 'zod';
+import type {VerbEntry} from '../types';
 
 // Verb form validation schema matching VerbEntry interface
 export const verbFormSchema = z.object({

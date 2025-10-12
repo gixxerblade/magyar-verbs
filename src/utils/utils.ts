@@ -1,5 +1,5 @@
-import { indefinitePatterns } from '../data/conjugation';
-import type { Pronoun, VerbEntry, VowelHarmony } from '../types';
+import {indefinitePatterns} from '../data/conjugation';
+import type {Pronoun, VerbEntry, VowelHarmony} from '../types';
 
 export function randomItem<T>(items: readonly T[]): T {
   return items[Math.floor(Math.random() * items.length)];

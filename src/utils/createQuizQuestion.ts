@@ -1,6 +1,6 @@
-import { pronounHints, pronounOrder } from '../contants';
-import type { QuizQuestion, VerbEntry } from '../types';
-import { buildConjugation, randomItem, shuffle } from './utils';
+import {pronounHints, pronounOrder} from '../contants';
+import type {QuizQuestion, VerbEntry} from '../types';
+import {buildConjugation, randomItem, shuffle} from './utils';
 
 export function createQuizQuestion(verbs: VerbEntry[]): QuizQuestion {
   const verb = randomItem(verbs);
@@ -17,5 +17,5 @@ export function createQuizQuestion(verbs: VerbEntry[]): QuizQuestion {
   const selectedDistractors = shuffle(distractors).slice(0, DISTRACTOR_COUNT);
 
   const options = shuffle([answer, ...selectedDistractors]);
-  return { verb, pronoun, answer, options, clue };
+  return {verb, pronoun, answer, options, clue};
 }

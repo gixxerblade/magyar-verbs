@@ -1,4 +1,4 @@
-import type { pronounOrder } from './contants';
+import type {pronounOrder} from './contants';
 
 export type VowelHarmony = 'back' | 'front' | 'mixed';
 

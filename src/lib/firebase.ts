@@ -1,7 +1,7 @@
-import { getAnalytics } from 'firebase/analytics';
-import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider, getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import {getAnalytics} from 'firebase/analytics';
+import {initializeApp} from 'firebase/app';
+import {GoogleAuthProvider, getAuth} from 'firebase/auth';
+import {getFirestore} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

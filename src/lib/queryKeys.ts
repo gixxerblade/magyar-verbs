@@ -1,4 +1,4 @@
-import { createQueryKeyStore } from '@lukemorales/query-key-factory';
+import {createQueryKeyStore} from '@lukemorales/query-key-factory';
 
 export const queryKeys = createQueryKeyStore({
   auth: {

@@ -1,8 +1,8 @@
-import { BookOpenIcon, LightBulbIcon } from '@heroicons/react/24/outline';
-import { useMemo } from 'react';
-import { indefinitePatterns } from '../data/conjugation';
+import {BookOpenIcon, LightBulbIcon} from '@heroicons/react/24/outline';
+import {useMemo} from 'react';
+import {indefinitePatterns} from '../data/conjugation';
 import '../App.css';
-import { pronounExplanations, pronounHints, pronounOrder } from '../contants';
+import {pronounExplanations, pronounHints, pronounOrder} from '../contants';
 
 export function ReferencePage() {
   const conjugationTable = useMemo(() => {
@@ -13,19 +13,19 @@ export function ReferencePage() {
         person: pronounHints[pronoun],
         explanation: pronounExplanations[pronoun],
         english: pattern?.english ?? '',
-        endings: pattern?.endings ?? { back: '', front: '', mixed: '' },
+        endings: pattern?.endings ?? {back: '', front: '', mixed: ''},
         note: pattern?.note ?? '',
       };
     });
   }, []);
 
   return (
-    <div className='panel'>
-      <section className='panel__section'>
+    <div className="panel">
+      <section className="panel__section">
         <h2>
-          <BookOpenIcon aria-hidden='true' /> Reference Table
+          <BookOpenIcon aria-hidden="true" /> Reference Table
         </h2>
-        <div className='section-intro'>
+        <div className="section-intro">
           <p>
             These endings apply to regular Hungarian verbs in the indefinite present tense when no
             connecting vowel is required. Match the ending to the verb&apos;s vowel harmony.
@@ -38,10 +38,10 @@ export function ReferencePage() {
               borderRadius: '0.5rem',
             }}
           >
-            <h3 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+            <h3 style={{fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem'}}>
               Understanding Pronouns:
             </h3>
-            <ul style={{ marginLeft: '1.5rem', lineHeight: '1.8' }}>
+            <ul style={{marginLeft: '1.5rem', lineHeight: '1.8'}}>
               <li>
                 <strong>1st person</strong> = the speaker (I, we)
               </li>
@@ -61,8 +61,8 @@ export function ReferencePage() {
             </ul>
           </div>
         </div>
-        <div className='data-table'>
-          <div className='data-table__header'>
+        <div className="data-table">
+          <div className="data-table__header">
             <span>Pronoun</span>
             <span>Person</span>
             <span>Meaning</span>
@@ -71,12 +71,12 @@ export function ReferencePage() {
             <span>Front (rounded)</span>
           </div>
           {conjugationTable.map((row) => (
-            <div key={row.pronoun} className='data-table__row'>
-              <span className='data-table__pronoun' title={row.explanation}>
+            <div key={row.pronoun} className="data-table__row">
+              <span className="data-table__pronoun" title={row.explanation}>
                 {row.pronoun}
               </span>
               <span
-                style={{ fontSize: '0.875rem', color: 'rgb(107, 114, 128)' }}
+                style={{fontSize: '0.875rem', color: 'rgb(107, 114, 128)'}}
                 title={row.explanation}
               >
                 {row.person}
@@ -85,21 +85,21 @@ export function ReferencePage() {
               <span>{row.endings.back}</span>
               <span>{row.endings.front}</span>
               <span>{row.endings.mixed}</span>
-              {row.note ? <p className='data-table__note'>{row.note}</p> : null}
+              {row.note ? <p className="data-table__note">{row.note}</p> : null}
             </div>
           ))}
         </div>
       </section>
-      <section className='panel__section'>
+      <section className="panel__section">
         <h3>
-          <LightBulbIcon aria-hidden='true' /> Study Tips
+          <LightBulbIcon aria-hidden="true" /> Study Tips
         </h3>
-        <div style={{ display: 'grid', gap: '1rem' }}>
+        <div style={{display: 'grid', gap: '1rem'}}>
           <div>
-            <h4 style={{ fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0' }}>
+            <h4 style={{fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0'}}>
               1. Start with the pronouns - memorize these first!
             </h4>
-            <ul className='tips' style={{ marginTop: '0.5rem' }}>
+            <ul className="tips" style={{marginTop: '0.5rem'}}>
               <li>
                 <strong>én</strong> (I) - always ends in <code>-ok/-ek/-ök</code>
               </li>
@@ -122,10 +122,10 @@ export function ReferencePage() {
           </div>
 
           <div>
-            <h4 style={{ fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0' }}>
+            <h4 style={{fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0'}}>
               2. Pick the right column based on the verb's vowels
             </h4>
-            <ul className='tips' style={{ marginTop: '0.5rem' }}>
+            <ul className="tips" style={{marginTop: '0.5rem'}}>
               <li>
                 <strong>Back vowels</strong> (a, á, o, ó, u, ú) → Use the "Back" column
               </li>
@@ -149,10 +149,10 @@ export function ReferencePage() {
           </div>
 
           <div>
-            <h4 style={{ fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0' }}>
+            <h4 style={{fontSize: '0.95rem', fontWeight: '600', margin: '0 0 0.5rem 0'}}>
               3. Watch out for these tricky ones
             </h4>
-            <ul className='tips' style={{ marginTop: '0.5rem' }}>
+            <ul className="tips" style={{marginTop: '0.5rem'}}>
               <li>
                 <strong>ő</strong> (he/she/it) has NO ending - just use the verb stem as-is
               </li>

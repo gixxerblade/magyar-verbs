@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import type { VerbEntry, VocabularyEntry } from '../../types';
+import {describe, expect, it} from 'vitest';
+import type {VerbEntry, VocabularyEntry} from '../../types';
 import {
   createAllFlashcards,
   createVerbFlashcards,
@@ -332,7 +332,7 @@ describe('createAllFlashcards', () => {
       },
     ];
 
-    const manyVocab: VocabularyEntry[] = Array.from({ length: 5 }, (_, i) => ({
+    const manyVocab: VocabularyEntry[] = Array.from({length: 5}, (_, i) => ({
       hungarian: `word${i}`,
       english: `word${i}`,
       category: 'essentials' as const,

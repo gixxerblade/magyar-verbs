@@ -1,4 +1,4 @@
-import { queryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {queryOptions, useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import {
   addDoc,
@@ -11,10 +11,10 @@ import {
   Timestamp,
   updateDoc,
 } from 'firebase/firestore';
-import { db } from '../lib/firebase';
-import { queryKeys } from '../lib/queryKeys';
-import type { VocabularyEntry, VocabularyFormData } from '../types';
-import { convertFirestoreTimestamps } from '../utils/firestore';
+import {db} from '../lib/firebase';
+import {queryKeys} from '../lib/queryKeys';
+import type {VocabularyEntry, VocabularyFormData} from '../types';
+import {convertFirestoreTimestamps} from '../utils/firestore';
 
 const VOCABULARY_COLLECTION = 'vocabulary';
 
@@ -84,7 +84,7 @@ export function useAddVocabulary() {
   return useMutation({
     mutationFn: addVocabulary,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.vocabulary.all.queryKey });
+      queryClient.invalidateQueries({queryKey: queryKeys.vocabulary.all.queryKey});
     },
   });
 }
@@ -94,10 +94,10 @@ export function useUpdateVocabulary() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<VocabularyFormData> }) =>
+    mutationFn: ({id, data}: {id: string; data: Partial<VocabularyFormData>}) =>
       updateVocabulary(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.vocabulary.all.queryKey });
+      queryClient.invalidateQueries({queryKey: queryKeys.vocabulary.all.queryKey});
     },
   });
 }
@@ -109,7 +109,7 @@ export function useDeleteVocabulary() {
   return useMutation({
     mutationFn: deleteVocabulary,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.vocabulary.all.queryKey });
+      queryClient.invalidateQueries({queryKey: queryKeys.vocabulary.all.queryKey});
     },
   });
 }

@@ -1,6 +1,8 @@
-import type { Pronoun, VowelHarmony } from './types';
+import type {Pronoun, VowelHarmony} from './types';
 
 export const pronounOrder = ['én', 'te', 'ő', 'mi', 'ti', 'ők'] as const;
+
+export const defaultSortingLang = 'hu';
 
 export const vowelHarmonyLabels: Record<VowelHarmony, string> = {
   back: 'Back (a, á, o, ó, u, ú)',

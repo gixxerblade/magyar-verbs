@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
-import { pronounOrder } from '../../contants';
-import type { VerbEntry } from '../../types';
-import { createQuizQuestion } from '../../utils/createQuizQuestion';
+import {describe, expect, it} from 'vitest';
+import {pronounOrder} from '../../contants';
+import type {VerbEntry} from '../../types';
+import {createQuizQuestion} from '../../utils/createQuizQuestion';
 
 describe('createQuizQuestion', () => {
   const testVerbs: VerbEntry[] = [

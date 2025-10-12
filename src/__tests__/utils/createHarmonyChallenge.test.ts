@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
-import type { VerbEntry } from '../../types';
-import { createHarmonyChallenge } from '../../utils/createHarmonyChallenge';
+import {describe, expect, it} from 'vitest';
+import type {VerbEntry} from '../../types';
+import {createHarmonyChallenge} from '../../utils/createHarmonyChallenge';
 
 describe('createHarmonyChallenge', () => {
   const testVerbs: VerbEntry[] = [

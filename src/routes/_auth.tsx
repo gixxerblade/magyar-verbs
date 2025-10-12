@@ -1,7 +1,7 @@
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
-import { onAuthStateChanged, signOut, type User } from 'firebase/auth';
-import { auth } from '../lib/firebase';
-import { isAuthorizedEmail } from '../utils/utils';
+import {createFileRoute, Outlet, redirect} from '@tanstack/react-router';
+import {onAuthStateChanged, signOut, type User} from 'firebase/auth';
+import {auth} from '../lib/firebase';
+import {isAuthorizedEmail} from '../utils/utils';
 
 export interface AuthContext {
   user: User | null;

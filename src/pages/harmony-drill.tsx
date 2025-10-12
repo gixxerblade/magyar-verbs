@@ -1,21 +1,21 @@
-import { Radio, RadioGroup } from '@headlessui/react';
+import {Radio, RadioGroup} from '@headlessui/react';
 import {
   ArrowPathIcon,
   CheckCircleIcon,
   LightBulbIcon,
   XCircleIcon,
 } from '@heroicons/react/24/outline';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import { pronounHints, vowelHarmonyLabels } from '../contants';
-import { indefinitePatterns } from '../data/conjugation';
-import { customVerbsQueryOptions } from '../hooks/useCustomVerbs';
-import type { HarmonyChallenge, VowelHarmony } from '../types';
-import { createHarmonyChallenge } from '../utils/createHarmonyChallenge';
-import { classNames, getEndingDescription } from '../utils/utils';
+import {useSuspenseQuery} from '@tanstack/react-query';
+import {useState} from 'react';
+import {pronounHints, vowelHarmonyLabels} from '../contants';
+import {indefinitePatterns} from '../data/conjugation';
+import {customVerbsQueryOptions} from '../hooks/useCustomVerbs';
+import type {HarmonyChallenge, VowelHarmony} from '../types';
+import {createHarmonyChallenge} from '../utils/createHarmonyChallenge';
+import {classNames, getEndingDescription} from '../utils/utils';
 
 export function HarmonyDrillPage() {
-  const { data: verbs } = useSuspenseQuery(customVerbsQueryOptions);
+  const {data: verbs} = useSuspenseQuery(customVerbsQueryOptions);
   const [harmonyChallenge, setHarmonyChallenge] = useState<HarmonyChallenge>(() =>
     createHarmonyChallenge(verbs)
   );
@@ -46,32 +46,32 @@ export function HarmonyDrillPage() {
   };
 
   return (
-    <div className='panel'>
-      <section className='panel__section'>
+    <div className="panel">
+      <section className="panel__section">
         <h2>
-          <LightBulbIcon aria-hidden='true' /> Harmony Drill
+          <LightBulbIcon aria-hidden="true" /> Harmony Drill
         </h2>
-        <p className='section-intro'>
+        <p className="section-intro">
           Identify the correct vowel harmony for each verb, then confirm to reveal the full form.
           Mastering harmony makes endings automatic.
         </p>
-        <div className='harmony-card'>
-          <div className='harmony-card__body'>
-            <p className='harmony-card__label'>Verb</p>
-            <p className='harmony-card__verb'>{harmonyChallenge.verb.stem}</p>
-            <p className='harmony-card__meta'>
+        <div className="harmony-card">
+          <div className="harmony-card__body">
+            <p className="harmony-card__label">Verb</p>
+            <p className="harmony-card__verb">{harmonyChallenge.verb.stem}</p>
+            <p className="harmony-card__meta">
               {harmonyChallenge.verb.infinitive} · {harmonyChallenge.verb.english}
             </p>
-            <p className='harmony-card__clue'>Target form: {targetHint}</p>
+            <p className="harmony-card__clue">Target form: {targetHint}</p>
           </div>
           <RadioGroup
             value={harmonyChoice}
             onChange={handleHarmonySubmit}
-            className='harmony-card__choices'
+            className="harmony-card__choices"
             disabled={harmonyAnswered}
           >
-            <RadioGroup.Label className='sr-only'>Choose vowel harmony</RadioGroup.Label>
-            <div className='harmony-card__choice-grid'>
+            <RadioGroup.Label className="sr-only">Choose vowel harmony</RadioGroup.Label>
+            <div className="harmony-card__choice-grid">
               {(Object.keys(vowelHarmonyLabels) as VowelHarmony[]).map((key) => {
                 const isCorrectAnswer = key === harmonyChallenge.verb.harmony;
                 const isSelected = harmonyChoice === key;
@@ -94,8 +94,8 @@ export function HarmonyDrillPage() {
                     disabled={harmonyAnswered}
                     className={classNames('harmony-card__choice', statusClass)}
                   >
-                    <span className='harmony-card__choice-title'>{vowelHarmonyLabels[key]}</span>
-                    <span className='harmony-card__choice-ending'>
+                    <span className="harmony-card__choice-title">{vowelHarmonyLabels[key]}</span>
+                    <span className="harmony-card__choice-ending">
                       {getEndingDescription(harmonyChallenge.pronoun, key)}
                     </span>
                   </Radio>
@@ -104,7 +104,7 @@ export function HarmonyDrillPage() {
             </div>
           </RadioGroup>
           {harmonyAnswered ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
               <div
                 className={classNames(
                   'harmony-card__feedback',
@@ -115,17 +115,17 @@ export function HarmonyDrillPage() {
               >
                 {harmonyFeedback === 'correct' ? (
                   <>
-                    <CheckCircleIcon aria-hidden='true' /> {harmonyChallenge.target}
+                    <CheckCircleIcon aria-hidden="true" /> {harmonyChallenge.target}
                   </>
                 ) : (
                   <>
-                    <XCircleIcon aria-hidden='true' /> The correct ending is{' '}
+                    <XCircleIcon aria-hidden="true" /> The correct ending is{' '}
                     {getEndingDescription(harmonyChallenge.pronoun, harmonyChallenge.verb.harmony)}.
                   </>
                 )}
               </div>
-              <button type='button' className='quiz__next' onClick={handleHarmonyNext}>
-                <ArrowPathIcon color='white' className='w-4 h-4' /> Next
+              <button type="button" className="quiz__next" onClick={handleHarmonyNext}>
+                <ArrowPathIcon color="white" className="w-4 h-4" /> Next
               </button>
             </div>
           ) : null}

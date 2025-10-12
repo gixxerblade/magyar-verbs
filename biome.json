@@ -42,9 +42,10 @@
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "jsxQuoteStyle": "single",
+      "jsxQuoteStyle": "double",
       "semicolons": "always",
-      "trailingCommas": "es5"
+      "trailingCommas": "es5",
+      "bracketSpacing": false
     }
   },
   "overrides": [
@@ -79,5 +80,12 @@
         }
       }
     }
-  ]
+  ],
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
 }

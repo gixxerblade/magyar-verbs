@@ -1,7 +1,7 @@
-import { pronounHints, pronounOrder } from '../contants';
-import { indefinitePatterns } from '../data/conjugation';
-import type { VerbEntry, VocabularyCategory, VocabularyEntry } from '../types';
-import { buildConjugation, shuffle } from './utils';
+import {pronounHints, pronounOrder} from '../contants';
+import {indefinitePatterns} from '../data/conjugation';
+import type {VerbEntry, VocabularyCategory, VocabularyEntry} from '../types';
+import {buildConjugation, shuffle} from './utils';
 
 export interface Flashcard {
   front: string;

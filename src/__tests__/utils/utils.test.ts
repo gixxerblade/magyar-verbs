@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import type { VerbEntry } from '../../types';
+import {describe, expect, it} from 'vitest';
+import type {VerbEntry} from '../../types';
 import {
   buildConjugation,
   classNames,
@@ -179,7 +179,7 @@ describe('utils', () => {
 
     it('should return items with roughly equal distribution', () => {
       const items = ['a', 'b', 'c'] as const;
-      const counts = { a: 0, b: 0, c: 0 };
+      const counts = {a: 0, b: 0, c: 0};
       const iterations = 300;
 
       for (let i = 0; i < iterations; i += 1) {

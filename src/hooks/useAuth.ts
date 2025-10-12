@@ -1,12 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {
   signOut as firebaseSignOut,
   onAuthStateChanged,
   signInWithPopup,
   type User,
 } from 'firebase/auth';
-import { auth, googleProvider } from '../lib/firebase';
-import { queryKeys } from '../lib/queryKeys';
+import {auth, googleProvider} from '../lib/firebase';
+import {queryKeys} from '../lib/queryKeys';
 
 // Sign in with Google
 async function signInWithGoogle(): Promise<User> {
