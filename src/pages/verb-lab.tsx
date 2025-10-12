@@ -77,8 +77,6 @@ export function VerbLab() {
             ))}
           </div>
         </RadioGroup>
-
-        
       </section>
     </div>
   );

@@ -24,7 +24,7 @@ export async function fetchVocabulary(): Promise<VocabularyEntry[]> {
   const vocabularyQuery = query(vocabularyCollection, orderBy('createdAt', 'desc'));
   const snapshot = await getDocs(vocabularyQuery);
 
-  return snapshot.docs.map(doc => ({
+  return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...convertFirestoreTimestamps<VocabularyEntry>(doc.data()),
   }));
