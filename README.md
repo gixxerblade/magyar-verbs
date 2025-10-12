@@ -1,6 +1,7 @@
 # Magyar Learning Playground
 
 [![CI](https://github.com/gixxerblade/magyar-verbs/actions/workflows/ci.yml/badge.svg)](https://github.com/gixxerblade/magyar-verbs/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gixxerblade/magyar-verbs/branch/main/graph/badge.svg)](https://codecov.io/gh/gixxerblade/magyar-verbs)
 
 An interactive web application for learning Hungarian (Magyar) language, featuring verb conjugation practice, vocabulary building, and flashcards. Master Hungarian verb patterns, vowel harmony, and essential vocabulary through engaging exercises and drills.
 
