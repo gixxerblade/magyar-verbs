@@ -25,7 +25,7 @@ import {
 import dayjs from 'dayjs';
 import type {JSX} from 'react';
 import {useEffect, useMemo, useState} from 'react';
-import {useForm} from 'react-hook-form';
+import {Controller, useForm} from 'react-hook-form';
 import {defaultSortingLang as hungarianLang} from '../contants';
 import {useDeleteVocabulary, useUpdateVocabulary, useVocabulary} from '../hooks/useVocabulary';
 import type {
@@ -60,6 +60,7 @@ const PART_OF_SPEECH_OPTIONS: Array<{value: VocabularyPartOfSpeech; label: strin
   {value: 'verb', label: 'Verb'},
   {value: 'adjective', label: 'Adjective'},
   {value: 'adverb', label: 'Adverb'},
+  {value: 'phrase', label: 'Phrase'},
   {value: 'other', label: 'Other'},
 ];
 
@@ -543,6 +544,7 @@ function EditVocabularyDialog({entry, isOpen, onClose}: EditVocabularyDialogProp
     handleSubmit,
     formState: {errors},
     reset,
+    control,
   } = useForm<VocabularyFormData>();
 
   useEffect(() => {
@@ -625,60 +627,129 @@ function EditVocabularyDialog({entry, isOpen, onClose}: EditVocabularyDialogProp
               </div>
 
               <div>
-                <label
-                  htmlFor="edit-partOfSpeech"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Part of Speech
                 </label>
-                <select
-                  id="edit-partOfSpeech"
-                  {...register('partOfSpeech')}
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500"
-                >
-                  {PART_OF_SPEECH_OPTIONS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <Controller
+                  name="partOfSpeech"
+                  control={control}
+                  render={({field}) => (
+                    <Listbox value={field.value} onChange={field.onChange}>
+                      <div className="relative">
+                        <ListboxButton className="relative w-full cursor-pointer rounded-lg border border-gray-300 bg-white py-2 pl-3 pr-10 text-left text-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500">
+                          <span className="block truncate">
+                            {PART_OF_SPEECH_OPTIONS.find((opt) => opt.value === field.value)
+                              ?.label || 'Select...'}
+                          </span>
+                          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon className="size-4 text-gray-400" />
+                          </span>
+                        </ListboxButton>
+                        <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none">
+                          {PART_OF_SPEECH_OPTIONS.map((option) => (
+                            <ListboxOption
+                              key={option.value}
+                              value={option.value}
+                              className="relative cursor-pointer select-none py-2 pl-10 pr-4 text-gray-900 data-[focus]:bg-pink-50"
+                            >
+                              <span className="block truncate font-normal data-[selected]:font-semibold">
+                                {option.label}
+                              </span>
+                              {field.value === option.value && (
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-pink-600">
+                                  <CheckIcon className="size-4" />
+                                </span>
+                              )}
+                            </ListboxOption>
+                          ))}
+                        </ListboxOptions>
+                      </div>
+                    </Listbox>
+                  )}
+                />
               </div>
 
               <div>
-                <label
-                  htmlFor="edit-difficulty"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Difficulty
-                </label>
-                <select
-                  id="edit-difficulty"
-                  {...register('difficulty')}
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500"
-                >
-                  {DIFFICULTY_OPTIONS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Difficulty</label>
+                <Controller
+                  name="difficulty"
+                  control={control}
+                  render={({field}) => (
+                    <Listbox value={field.value} onChange={field.onChange}>
+                      <div className="relative">
+                        <ListboxButton className="relative w-full cursor-pointer rounded-lg border border-gray-300 bg-white py-2 pl-3 pr-10 text-left text-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500">
+                          <span className="block truncate">
+                            {DIFFICULTY_OPTIONS.find((opt) => opt.value === field.value)?.label ||
+                              'Select...'}
+                          </span>
+                          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon className="size-4 text-gray-400" />
+                          </span>
+                        </ListboxButton>
+                        <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none">
+                          {DIFFICULTY_OPTIONS.map((option) => (
+                            <ListboxOption
+                              key={option.value}
+                              value={option.value}
+                              className="relative cursor-pointer select-none py-2 pl-10 pr-4 text-gray-900 data-[focus]:bg-pink-50"
+                            >
+                              <span className="block truncate font-normal data-[selected]:font-semibold">
+                                {option.label}
+                              </span>
+                              {field.value === option.value && (
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-pink-600">
+                                  <CheckIcon className="size-4" />
+                                </span>
+                              )}
+                            </ListboxOption>
+                          ))}
+                        </ListboxOptions>
+                      </div>
+                    </Listbox>
+                  )}
+                />
               </div>
 
               <div className="col-span-2">
-                <label htmlFor="edit-category" className="block text-sm font-medium text-gray-700">
-                  Category *
-                </label>
-                <select
-                  id="edit-category"
-                  {...register('category', {required: 'Category is required'})}
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500"
-                >
-                  {CATEGORY_OPTIONS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Category *</label>
+                <Controller
+                  name="category"
+                  control={control}
+                  rules={{required: 'Category is required'}}
+                  render={({field}) => (
+                    <Listbox value={field.value} onChange={field.onChange}>
+                      <div className="relative">
+                        <ListboxButton className="relative w-full cursor-pointer rounded-lg border border-gray-300 bg-white py-2 pl-3 pr-10 text-left text-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500">
+                          <span className="block truncate">
+                            {CATEGORY_OPTIONS.find((opt) => opt.value === field.value)?.label ||
+                              'Select...'}
+                          </span>
+                          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon className="size-4 text-gray-400" />
+                          </span>
+                        </ListboxButton>
+                        <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 focus:outline-none">
+                          {CATEGORY_OPTIONS.map((option) => (
+                            <ListboxOption
+                              key={option.value}
+                              value={option.value}
+                              className="relative cursor-pointer select-none py-2 pl-10 pr-4 text-gray-900 data-[focus]:bg-pink-50"
+                            >
+                              <span className="block truncate font-normal data-[selected]:font-semibold">
+                                {option.label}
+                              </span>
+                              {field.value === option.value && (
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-pink-600">
+                                  <CheckIcon className="size-4" />
+                                </span>
+                              )}
+                            </ListboxOption>
+                          ))}
+                        </ListboxOptions>
+                      </div>
+                    </Listbox>
+                  )}
+                />
                 {errors.category && (
                   <p className="mt-1 text-sm text-red-600">{errors.category.message}</p>
                 )}
