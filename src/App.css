@@ -61,6 +61,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
+  min-height: 60px;
 }
 
 .tab:hover:not(.tab--active) {
@@ -230,7 +231,7 @@
 
 .conjugation-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
   gap: 12px;
   margin-bottom: 24px;
 }

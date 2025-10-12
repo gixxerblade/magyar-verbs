@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { queryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import {
   addDoc,
@@ -19,16 +19,21 @@ import { convertFirestoreTimestamps } from '../utils/firestore';
 const VOCABULARY_COLLECTION = 'vocabulary';
 
 // Fetch all vocabulary entries
-async function fetchVocabulary(): Promise<VocabularyEntry[]> {
+export async function fetchVocabulary(): Promise<VocabularyEntry[]> {
   const vocabularyCollection = collection(db, VOCABULARY_COLLECTION);
   const vocabularyQuery = query(vocabularyCollection, orderBy('createdAt', 'desc'));
   const snapshot = await getDocs(vocabularyQuery);
 
-  return snapshot.docs.map((doc) => ({
+  return snapshot.docs.map(doc => ({
     id: doc.id,
     ...convertFirestoreTimestamps<VocabularyEntry>(doc.data()),
   }));
 }
+
+export const vocabularyOptions = queryOptions({
+  ...queryKeys.vocabulary.all,
+  queryFn: fetchVocabulary,
+});
 
 // Add new vocabulary entry
 async function addVocabulary(data: VocabularyFormData): Promise<VocabularyEntry> {

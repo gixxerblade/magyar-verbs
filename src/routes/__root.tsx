@@ -37,7 +37,7 @@ function RootComponent() {
           <AuthButton user={user ?? null} />
         </header>
 
-        <nav className='tab-list'>
+        <nav className='flex items-center justify-center'>
           <Link
             to='/reference'
             className='tab'

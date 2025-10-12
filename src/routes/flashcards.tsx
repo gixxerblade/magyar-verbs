@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 import { customVerbsQueryOptions } from '../hooks/useCustomVerbs';
-import { queryKeys } from '../lib/queryKeys';
 import { FlashcardsPage } from '../pages/flashcards';
+import { vocabularyOptions } from '../hooks/useVocabulary';
 
 const flashcardSearchSchema = z.object({
   type: z.enum(['all', 'verbs', 'vocabulary']).catch('all'),
@@ -37,7 +37,7 @@ export const Route = createFileRoute('/flashcards')({
   }),
   loader: async ({ context: { queryClient } }) => {
     const verbs = await queryClient.ensureQueryData(customVerbsQueryOptions);
-    const vocabulary = await queryClient.ensureQueryData(queryKeys.vocabulary.all);
+    const vocabulary = await queryClient.ensureQueryData(vocabularyOptions);
     return { verbs, vocabulary };
   },
   component: FlashcardsPage,

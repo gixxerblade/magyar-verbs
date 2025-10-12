@@ -1,4 +1,4 @@
-import { RadioGroup } from '@headlessui/react';
+import { Label, Radio, RadioGroup } from '@headlessui/react';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
@@ -44,27 +44,6 @@ export function VerbLab() {
           Choose a verb to see every person conjugated instantly. Compare the endings and read the
           sample sentences.
         </p>
-        <RadioGroup value={selectedVerb} onChange={setSelectedVerb} className='verb-picker'>
-          <RadioGroup.Label className='sr-only'>Select a verb</RadioGroup.Label>
-          <div className='verb-picker__grid'>
-            {verbs.map((verb) => (
-              <RadioGroup.Option
-                key={verb.id}
-                value={verb}
-                className={({ checked }) => classNames('verb-card', checked && 'verb-card--active')}
-              >
-                <div>
-                  <p className='verb-card__stem'>{verb.stem}</p>
-                  <p className='verb-card__meta'>
-                    {verb.infinitive} · {verb.english}
-                  </p>
-                  <p className='verb-card__tag'>{vowelHarmonyLabels[verb.harmony]}</p>
-                </div>
-              </RadioGroup.Option>
-            ))}
-          </div>
-        </RadioGroup>
-
         <div className='conjugation-grid'>
           {selectedVerbConjugations.map((item) => (
             <div key={item.pronoun} className='conjugation-card'>
@@ -78,6 +57,28 @@ export function VerbLab() {
         {selectedVerb.sample ? (
           <blockquote className='sample-sentence'>{selectedVerb.sample}</blockquote>
         ) : null}
+        <RadioGroup value={selectedVerb} onChange={setSelectedVerb} className='verb-picker'>
+          <Label className='sr-only'>Select a verb</Label>
+          <div className='verb-picker__grid'>
+            {verbs.map((verb) => (
+              <Radio
+                key={verb.id}
+                value={verb}
+                className={({ checked }) => classNames('verb-card', checked && 'verb-card--active')}
+              >
+                <div>
+                  <p className='verb-card__stem'>{verb.stem}</p>
+                  <p className='verb-card__meta'>
+                    {verb.infinitive} · {verb.english}
+                  </p>
+                  <p className='verb-card__tag'>{vowelHarmonyLabels[verb.harmony]}</p>
+                </div>
+              </Radio>
+            ))}
+          </div>
+        </RadioGroup>
+
+        
       </section>
     </div>
   );
