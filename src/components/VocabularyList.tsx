@@ -24,7 +24,7 @@ import {
 } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
 import type {JSX} from 'react';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {defaultSortingLang as hungarianLang} from '../contants';
 import {useDeleteVocabulary, useUpdateVocabulary, useVocabulary} from '../hooks/useVocabulary';
@@ -543,19 +543,21 @@ function EditVocabularyDialog({entry, isOpen, onClose}: EditVocabularyDialogProp
     handleSubmit,
     formState: {errors},
     reset,
-  } = useForm<VocabularyFormData>({
-    defaultValues: entry
-      ? {
-          hungarian: entry.hungarian,
-          english: entry.english,
-          category: entry.category,
-          difficulty: entry.difficulty,
-          notes: entry.notes || '',
-          exampleSentence: entry.exampleSentence || '',
-          partOfSpeech: entry.partOfSpeech,
-        }
-      : undefined,
-  });
+  } = useForm<VocabularyFormData>();
+
+  useEffect(() => {
+    if (entry) {
+      reset({
+        hungarian: entry.hungarian,
+        english: entry.english,
+        category: entry.category,
+        difficulty: entry.difficulty,
+        notes: entry.notes || '',
+        exampleSentence: entry.exampleSentence || '',
+        partOfSpeech: entry.partOfSpeech,
+      });
+    }
+  }, [entry, reset]);
 
   const onSubmit = (data: VocabularyFormData): void => {
     if (!entry?.id) return;
